@@ -24,7 +24,8 @@ namespace QuanLyCaPhe.DBLayer
         /// <summary>
         /// Lấy dữ liệu đổ lên dataset
         /// </summary>
-        public DataSet ExecuteQueryDataSet(string strSQL, CommandType ct)
+        public DataSet ExecuteQueryDataSet(string strSQL, CommandType ct,
+            params SqlParameter[] param)
         {
             //Kiểm tra xem csdl đang kết nối, để đóng lại
             if (conn.State == ConnectionState.Open)
@@ -34,11 +35,20 @@ namespace QuanLyCaPhe.DBLayer
             cmd.CommandType = ct;
             cmd.CommandText = strSQL;
 
-            dt = new SqlDataAdapter(cmd);
-
             DataSet ds = new DataSet();
+
+            if (param.Count() > 0)
+            {
+                foreach (SqlParameter p in param)
+                    cmd.Parameters.Add(p);
+            }
+
+            dt = new SqlDataAdapter(cmd);
             dt.Fill(ds);
 
+            cmd.Parameters.Clear();
+
+            conn.Close();
             return ds;
         }
 
@@ -46,7 +56,8 @@ namespace QuanLyCaPhe.DBLayer
         /// Thực hiện câu truy vấn, dùng để cập nhật, xóa, thêm.
         /// </summary>
         /// <returns></returns>
-        public bool MyExecuteNonQuery(string strSQL, CommandType ct, ref string error)
+        public bool MyExecuteNonQuery(string strSQL, CommandType ct, ref string error,
+            params SqlParameter[] param)
         {
             bool f = false;
 
@@ -56,8 +67,16 @@ namespace QuanLyCaPhe.DBLayer
                     conn.Close();
                 conn.Open();
 
+                cmd.Parameters.Clear();
+
                 cmd.CommandText = strSQL;
                 cmd.CommandType = ct;
+
+                if (param.Count() > 0)
+                {
+                    foreach (SqlParameter p in param)
+                        cmd.Parameters.Add(p);
+                }
 
                 cmd.ExecuteNonQuery();
 
@@ -226,7 +245,6 @@ namespace QuanLyCaPhe.DBLayer
         /// 
         public void LaySoTime(string strSQL, CommandType ct, ref float dl)
         {
-
             try
             {
                 if (conn.State == ConnectionState.Open)
