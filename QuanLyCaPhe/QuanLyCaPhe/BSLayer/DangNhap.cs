@@ -22,12 +22,12 @@ namespace QuanLyCaPhe.BSLayer
             string sqlstring = "Select Count(*) From DangNhap Where TaiKhoan = '" + tk + "'" + "AND MatKhau='" + mk + "'";
             if (dbMain.CheckThongTin(sqlstring, CommandType.Text, ref err) == false)
             {
-                err = "Thất Bại";
+                err = "Tài khoản hoặc mật khẩu không đúng. Vui Long Thử Lại";
                 return false;
             }
             else
             {
-                err = "Thành Công";
+                err = "Đăng nhập thành công";
                 sqlstring = "Select MaNV From DangNhap where TaiKhoan='" + tk + "'";
                 dbMain.LayMa(sqlstring, CommandType.Text, ref MaNV);
 
@@ -37,7 +37,8 @@ namespace QuanLyCaPhe.BSLayer
         }
         public DataSet LayTK()
         {
-            return dbMain.ExecuteQueryDataSet("select *from DangNhap", CommandType.Text);
+            //return dbMain.ExecuteQueryDataSet("select *from DangNhap", CommandType.Text);
+            return dbMain.ExecuteQueryDataSet("Read_DangNhap", CommandType.StoredProcedure);
         }
 
 
@@ -58,32 +59,33 @@ namespace QuanLyCaPhe.BSLayer
         }
         public bool XoaTK(string MaNV, ref string error)
         {
-            string sqlString = $"delete from DangNhap where MaNV = '{MaNV}'";
-            return dbMain.MyExecuteNonQuery(sqlString, CommandType.Text, ref error);
+            //string sqlString = $"delete from DangNhap where MaNV = '{MaNV}'";
+            //return dbMain.MyExecuteNonQuery(sqlString, CommandType.Text, ref error);
+            return dbMain.MyExecuteNonQuery("Delete_DangNhap", CommandType.StoredProcedure, ref error, new SqlParameter("@MaNV", MaNV));
         }
         public bool RenewTK(string MaNV, ref string error)
         {
-            string sqlString;
+            //string sqlString;
             try
             {
-                sqlString = "Update DangNhap Set MatKhau=N'" + 123 +
-                  "' Where MaNV= '" + MaNV + "'";
+                //sqlString = "Update DangNhap Set MatKhau=N'" + 123 +
+                //  "' Where MaNV= '" + MaNV + "'";
+                error = "Sửa thành công";
+                return dbMain.MyExecuteNonQuery("Renew_DangNhap", CommandType.StoredProcedure, ref error, new SqlParameter("@MaNV", MaNV));
             }
             catch (SqlException)
             {
                 error = "Sửa không được";
                 return false;
             }
-            error = "Sửa thành công";
-            return dbMain.MyExecuteNonQuery(sqlString, CommandType.Text, ref error);
         }
         public bool SuaPass(string MaNV,string Pass, ref string error)
         {
-            string sqlString;
+            //string sqlString;
             try
             {
-                sqlString = "Update DangNhap Set MatKhau=N'" + Pass +
-                  "' Where MaNV= '" + MaNV + "'";
+                //sqlString = "Update DangNhap Set MatKhau=N'" + Pass +
+                //  "' Where MaNV= '" + MaNV + "'";
                 error = "Sửa thành công";
             }
             catch (SqlException)
@@ -91,8 +93,7 @@ namespace QuanLyCaPhe.BSLayer
                 error = "Sửa không được";
                 return false;
             }
-            
-            return dbMain.MyExecuteNonQuery(sqlString, CommandType.Text, ref error);
+            return dbMain.MyExecuteNonQuery("Update_DangNhap", CommandType.StoredProcedure, ref error, new SqlParameter("@MaNV", MaNV), new SqlParameter("@MatKhau", Pass));
         }
     }
 }

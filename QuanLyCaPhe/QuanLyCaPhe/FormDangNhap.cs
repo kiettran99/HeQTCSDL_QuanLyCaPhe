@@ -41,7 +41,6 @@ namespace QuanLyCaPhe
                 //Thoát form đăng nhập khi đăng nhập thành công
                 this.Close();
             }
-            Close();
             MessageBox.Show(err);
         }
 

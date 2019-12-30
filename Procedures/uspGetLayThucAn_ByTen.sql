@@ -1,10 +1,10 @@
 ﻿--Lấy Thức Ăn 
 USE QuanLyCaPhe
 GO
-IF OBJECT_ID('uspGetLayThucAn') IS NOT NULL
-DROP PROC uspGetLayThucAn
+IF OBJECT_ID('uspGetLayThucAn_ByTen') IS NOT NULL
+DROP PROC uspGetLayThucAn_ByTen
 GO
-CREATE PROC uspGetLayThucAn
+CREATE PROC uspGetLayThucAn_ByTen
 	@TenThucAn nvarchar(50)
 AS
 BEGIN
@@ -13,4 +13,4 @@ BEGIN
 	WHERE TenThucAn=@TenThucAn
 END
 --GO
-EXEC uspGetLayThucAn 'Trái Cây Tô';
+EXEC uspGetLayThucAn_ByTen 'Trái Cây Tô';

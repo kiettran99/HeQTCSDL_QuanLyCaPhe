@@ -22,15 +22,13 @@ begin
 end
 go
 
-drop procedure if exists Read_ChiTietHoaDon_ID
+drop procedure if exists Read_ChiTietHoaDon_IDBan
 go
 
-create procedure Read_ChiTietHoaDon_ID @idHoaDon int, @idThucAn int
+create procedure Read_ChiTietHoaDon_IDBan @idBanAn int
 as
 begin
-	select * 
-	from ChiTietHoaDon
-	where IDHoaDon = @idHoaDon and IDThucAn = @idThucAn
+	Select TenThucAn, SoLuong, Gia from ChiTietHoaDon join HoaDon on ChiTietHoaDon.IDHoaDon = HoaDon.IDHoaDon join ThucAn on ThucAn.IDThucAn = ChiTietHoaDon.IDThucAn join BanAn on BanAn.IDBanAn = HoaDon.IDBanAn where BanAn.IDBanAn = @idBanAn and HoaDon.TinhTrang = 0
 end
 go
 
@@ -51,10 +49,11 @@ go
 drop procedure if exists Delete_ChiTietHoaDon
 go
 
-create procedure Delete_ChiTietHoaDon @idHoaDon int, @idThucAn int
+create procedure Delete_ChiTietHoaDon @idBanAn int, @idThucAn int
 as
 begin
-	delete from ChiTietHoaDon 
-	where IDHoaDon = @idHoaDon and IDThucAn = @idThucAn
+	delete from ChiTietHoaDon
+	 where IDThucAn = @idThucAn
+	  and IDHoaDon = (select IDHoaDon from HoaDon where IDBanAn = @idBanAn and TinhTrang = 0)
 end
 go

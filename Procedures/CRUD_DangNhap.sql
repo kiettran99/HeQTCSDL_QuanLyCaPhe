@@ -40,13 +40,13 @@ go
 drop procedure if exists Update_DangNhap
 go
 
-create procedure Update_DangNhap @TaiKhoan nvarchar(20),
+create procedure Update_DangNhap @MaNV nvarchar(20),
 	@MatKhau nvarchar(20)
 as
 begin
 	update DangNhap
 	set MatKhau = @MatKhau
-	where TaiKhoan = @TaiKhoan
+	where MaNV = @MaNV
 end
 go
 
@@ -54,11 +54,11 @@ go
 drop procedure if exists Delete_DangNhap
 go
 
-create procedure Delete_DangNhap @TaiKhoan nvarchar(20)
+create procedure Delete_DangNhap @MaNV nvarchar(20)
 as
 begin
 	delete from DangNhap 
-	where TaiKhoan = @TaiKhoan
+	where MaNV = @MaNV
 end
 go
 
@@ -66,12 +66,12 @@ go
 drop procedure if exists Renew_DangNhap
 go
 
-create procedure Renew_DangNhap @TaiKhoan nvarchar(20)
+create procedure Renew_DangNhap @MaNV nvarchar(20)
 as
 begin
 	update DangNhap
 	set MatKhau = N'123'
-	where TaiKhoan = @TaiKhoan
+	where MaNV = @MaNV
 end
 go
 
