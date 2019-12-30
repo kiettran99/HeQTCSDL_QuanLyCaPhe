@@ -19,26 +19,42 @@ namespace QuanLyCaPhe.BSLayer
         public DataSet LayThucAn()
         {
             //return dbMain.ExecuteQueryDataSet("select *from ThucAn", CommandType.Text);
-            
-            return dbMain.ExecuteQueryDataSet("uspGetLayThucAn_ByTen", CommandType.StoredProcedure);
+
+            return dbMain.ExecuteQueryDataSet("uspGetLayThucAn", CommandType.StoredProcedure);
         }
 
         public DataSet LayThucAnTheoLoai(string tenLoaiThucAn)
         {
 
             //return dbMain.ExecuteQueryDataSet($"select * from ThucAn join LoaiThucAn on ThucAn.IDLoaiThucAn = LoaiThucAn.IDLoaiThucAn where TenLoaiThucAn = N'{tenLoaiThucAn}'", CommandType.Text);
-            return dbMain.ExecuteQueryDataSet("uspGetLayThucAn_ByTenLoaiThucAn", CommandType.StoredProcedure);
+            return dbMain.ExecuteQueryDataSet("uspGetLayThucAn_ByTenLoaiThucAn", CommandType.StoredProcedure, new SqlParameter("@TenLoaiThucAn", tenLoaiThucAn));
         }
 
+        public bool ThemThucAn(string MaThucAn, string DanhMuc, float Gia, string TenMon, ref string error)
+        {
+            string sqlString;
+            try
+            {
+                sqlString = $"Insert into ThucAn values(N'{MaThucAn.Trim()}',  N'{TenMon.ToString()}', N'{DanhMuc.Trim()}', '{Gia}')";
+                error = "Thêm thành công";
+            }
+            catch (SqlException)
+            {
+                error = "Thêm không được";
+                return false;
+            }
+
+            return dbMain.MyExecuteNonQuery(sqlString, CommandType.Text, ref error);
+        }
 
         public bool ThemThucAn(ref string error,
-           int  IDHoaDon ,
-          int IDThucAn  ,
+           int IDHoaDon,
+          int IDThucAn,
          string TenThucAn,
-	    int	IDLoaiThucAn,
-        float Gia  ,
-		string    TenLoaiThucAn ,
-		int    SoLuong )
+        int IDLoaiThucAn,
+        float Gia,
+        string TenLoaiThucAn,
+        int SoLuong)
         {
             //string sqlString;
             //try
@@ -64,30 +80,34 @@ namespace QuanLyCaPhe.BSLayer
 
 
 
-    }
-        public bool SuaThucAn(ref string error,
-           int  IDHoaDon ,
-          int IDThucAn  ,
-         string TenThucAn,
-	    int	IDLoaiThucAn,
-        float Gia  ,
-		string    TenLoaiThucAn ,
-		int    SoLuong )
-        {
-            //string sqlString;
-            //try
-            //{
-            //    sqlString = "Update ThucAn Set TenThucAn = N'" + TenMon +"',IDLoaiThucAn=N'" + int.Parse(DanhMuc) +
-            //    "',Gia='" + float.Parse(Gia) + "'where IDThucAn = '" + int.Parse(MaThucAn) + "'";
-            //    error = "Sửa thành công";
-            //}
-            //catch (SqlException)
-            //{
-            //    error = "Sửa không được";
-            //    return false;
-            //}
+        }
 
-            //return dbMain.MyExecuteNonQuery(sqlString, CommandType.Text, ref error);
+        public bool SuaThucAn(string MaThucAn, string DanhMuc, string Gia, string TenMon, ref string error)
+        {
+            string sqlString;
+            try
+            {
+                sqlString = "Update ThucAn Set TenThucAn = N'" + TenMon + "',IDLoaiThucAn=N'" + int.Parse(DanhMuc) +
+                "',Gia='" + float.Parse(Gia) + "'where IDThucAn = '" + int.Parse(MaThucAn) + "'";
+                error = "Sửa thành công";
+            }
+            catch (SqlException)
+            {
+                error = "Sửa không được";
+                return false;
+            }
+
+            return dbMain.MyExecuteNonQuery(sqlString, CommandType.Text, ref error);
+        }
+        public bool SuaThucAn(ref string error,
+           int IDHoaDon,
+          int IDThucAn,
+         string TenThucAn,
+        int IDLoaiThucAn,
+        float Gia,
+        string TenLoaiThucAn,
+        int SoLuong)
+        {     
             return dbMain.MyExecuteNonQuery("uspUpdateThucAn", CommandType.StoredProcedure, ref error,
                     new SqlParameter("@IDHoaDon", IDHoaDon),
                     new SqlParameter("@IDThucAn", IDThucAn),

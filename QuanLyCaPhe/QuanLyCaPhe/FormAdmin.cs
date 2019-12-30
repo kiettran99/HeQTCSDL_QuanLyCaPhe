@@ -687,8 +687,8 @@ namespace QuanLyCaPhe
 
             MemoryStream pic = new MemoryStream();           
             pictureBox1.Image.Save(pic, pictureBox1.Image.RawFormat);
-            BLNV.ThemNhanVien(txtMaNV.Text, txtHoNV.Text.Trim(), txtTenNV.Text.Trim(), rdbNu.Checked, dtbNgayNV.Value,
-                   dtbNgaySinh.Value, txtDiaChi.Text.Trim(), txtDienThoai.Text.Trim(), tenanh, ref err);
+            BLNV.ThemNhanVien(txtMaNV.Text, txtHoNV.Text.Trim(), txtTenNV.Text.Trim(), rdbNu.Checked,
+           dtbNgaySinh.Value, txtDiaChi.Text.Trim(),dtbNgayNV.Value, txtDienThoai.Text.Trim(), tenanh, ref err);
             BLCHC.ThemNhanVien(txtMaNV.Text.Trim(), txtTenNV.Text.Trim(), ref err);
             BLTL.ThemNhanVien(txtMaNV.Text.Trim(), txtTenNV.Text.Trim(), ref err);
 

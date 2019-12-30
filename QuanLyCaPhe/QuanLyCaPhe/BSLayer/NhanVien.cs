@@ -23,8 +23,26 @@ namespace QuanLyCaPhe.BSLayer
 
             return dbMain.ExecuteQueryDataSet("uspGetNhanVien_ByTenNV", CommandType.StoredProcedure);
         }
-        public bool SuaNhanVien(ref string error,
 
+        public bool SuaNhanVien(string MaNV, string Ho, string TenNV, bool Nu, DateTime NgayNV, DateTime NgaySinh, string DiaChi, string SDT, ref string error)
+        {
+            string sqlString;
+            try
+            {
+                sqlString = "Update NhanVien Set HoNV=N'" + Ho + "',TenNV=N'" + TenNV +
+                "',Nu='" + Nu + "',NgayBD='" + NgayNV + "',NgaySinh='" + NgaySinh +
+                "',DiaChi=N'" + DiaChi + "',SDT='" + SDT + "' Where MaNV= '" + MaNV + "'";
+            }
+            catch (SqlException)
+            {
+                error = "Sửa không được";
+                return false;
+            }
+            error = "Sửa thành công";
+            return dbMain.MyExecuteNonQuery(sqlString, CommandType.Text, ref error);
+        }
+
+        public bool SuaNhanVien(
            string MaNV,
            string HoNV,
            string TenNV,
@@ -34,22 +52,9 @@ namespace QuanLyCaPhe.BSLayer
            DateTime NgayBD,
            byte HinhAnh,
            TimeSpan GioIn,
-           TimeSpan GioOut)
+           TimeSpan GioOut,
+           ref string error)
         {
-            //string sqlString;
-            //try
-            //{
-            //    sqlString = "Update NhanVien Set HoNV=N'" + Ho + "',TenNV=N'" + TenNV +
-            //    "',Nu='" + Nu + "',NgayBD='" + NgayNV + "',NgaySinh='" + NgaySinh +
-            //    "',DiaChi=N'" + DiaChi + "',SDT='" + SDT + "' Where MaNV= '" + MaNV + "'";
-            //}
-            //catch (SqlException)
-            //{
-            //    error = "Sửa không được";
-            //    return false;
-            //}
-            //error = "Sửa thành công";
-            //return dbMain.MyExecuteNonQuery(sqlString, CommandType.Text, ref error);
 
             return dbMain.MyExecuteNonQuery("uspUpdateNhanVien", CommandType.StoredProcedure, ref error,
                 new SqlParameter("@MaNV", MaNV),
@@ -65,7 +70,7 @@ namespace QuanLyCaPhe.BSLayer
 
 
         }
-        public void LayTKMK(string MaNV, ref string  TK, ref string MK)
+        public void LayTKMK(string MaNV, ref string TK, ref string MK)
         {
             string sqlString;
             try
@@ -98,18 +103,19 @@ namespace QuanLyCaPhe.BSLayer
         //    error = "Thêm thành công";
         //    return dbMain.MyExecuteNonQuery(sqlString, CommandType.Text, ref error);
         //}
-        public bool ThemNhanVien(ref string error,
 
-           string MaNV,
-           string HoNV,
-           string TenNV,
-           bool Nu,
-           DateTime NgaySinh,
-           int SDT,
-           DateTime NgayBD,
-           byte HinhAnh,
-           TimeSpan GioIn,
-           TimeSpan GioOut)
+        public bool ThemNhanVien(string MaNV,
+            string HoNV,
+            string TenNV,
+            bool Nu,
+            DateTime NgaySinh,
+            string DiaChi,
+            DateTime NgayBD,
+            string SDT,
+            
+            string HinhAnh,
+           
+            ref string error)
 
         {
             return dbMain.MyExecuteNonQuery("uspInsertNhanVien", CommandType.StoredProcedure, ref error,
@@ -118,11 +124,11 @@ namespace QuanLyCaPhe.BSLayer
                 new SqlParameter("@TenNV", TenNV),
                 new SqlParameter("@Nu", Nu),
                 new SqlParameter("@NgaySinh", NgaySinh),
+                new SqlParameter ("@DiaChi",DiaChi),
                 new SqlParameter("@SDT", SDT),
                 new SqlParameter("@NgayBD", NgayBD),
-                new SqlParameter("@HinhAnh", HinhAnh),
-                new SqlParameter("@GioIn", GioIn),
-                new SqlParameter("@GioOut", GioOut));
+                new SqlParameter("@HinhAnh", HinhAnh)
+              );
         }
 
 

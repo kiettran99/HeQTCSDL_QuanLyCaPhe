@@ -54,11 +54,6 @@ namespace QuanLyCaPhe.DBLayer
             return ds;
         }
 
-        internal static bool CustomExecuteNonQuery()
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// Thực hiện câu truy vấn, dùng để cập nhật, xóa, thêm.
         /// </summary>

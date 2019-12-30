@@ -22,7 +22,14 @@ namespace QuanLyCaPhe.BSLayer
             return dbMain.ExecuteQueryDataSet("uspGetLayTTTL", CommandType.StoredProcedure);
             
         }
-        public bool ThemNhanVien(ref string error,
+
+        public bool ThemNhanVien(string MaNV, string TenNV, ref string error)
+        {
+            string sqlString;
+            sqlString = $"Insert into TinhLuong values('{MaNV}', N'{TenNV}',N'{0}',N'{0}')";
+            return dbMain.MyExecuteNonQuery(sqlString, CommandType.Text, ref error);
+        }
+        public bool ThemNhanVien(
                 
             string MaNV,
             string HoNV,
@@ -33,10 +40,11 @@ namespace QuanLyCaPhe.BSLayer
             DateTime NgayBD,
             byte HinhAnh,
             TimeSpan GioIn,
-            TimeSpan GioOut)
+            TimeSpan GioOut,
+            ref string error)
 
         {
-            return db.CustomExecuteNonQuery("uspInsertNhanVien",CommandType.StoredProcedure,ref error,
+            return dbMain.MyExecuteNonQuery("uspInsertNhanVien",CommandType.StoredProcedure,ref error,
                 new SqlParameter("@MaNV",MaNV),
                 new SqlParameter("@HoNV", HoNV),
                 new SqlParameter("@TenNV", TenNV),
@@ -76,26 +84,37 @@ namespace QuanLyCaPhe.BSLayer
         
         public void LayDuLieu(string MaNV,ref TimeSpan dl1,ref TimeSpan dl2)
         {
-             string sqlString1 = "Select GioIn from ChamCong where MaNV ='" + MaNV + "'";
+            string sqlString1 = "Select GioIn from ChamCong where MaNV ='" + MaNV + "'";
 
-             string sqlString2 = "Select GioOut from ChamCong where MaNV ='" + MaNV + "'";
-            dbMain.LayTime(sqlString1,sqlString2, CommandType.Text, ref dl1,ref dl2);
-            
+            string sqlString2 = "Select GioOut from ChamCong where MaNV ='" + MaNV + "'";
+            dbMain.LayTime(sqlString1, sqlString2, CommandType.Text, ref dl1, ref dl2);
+
             return;
+
+
+
         }
         public bool XoaNV(string MaNV,ref string error)
         {
-            string sqlString = $"delete from TinhLuong where MaNV = '{MaNV}'";
+            //string sqlString = $"delete from TinhLuong where MaNV = '{MaNV}'";
 
-            return dbMain.MyExecuteNonQuery(sqlString, CommandType.Text, ref error);
+            //return dbMain.MyExecuteNonQuery(sqlString, CommandType.Text, ref error);
+
+            return dbMain.MyExecuteNonQuery("uspDeleteNhanVien", CommandType.StoredProcedure, ref error, new SqlParameter("MaNV", MaNV));
+
         }
 
         public void LaySoTime(string MaNV, ref float SoTime)
         {
-            string sqlString = "Select SoGioLam from TinhLuong where MaNV ='" + MaNV + "'";
-            try { dbMain.LaySoTime(sqlString, CommandType.Text, ref SoTime); }
-            catch { }
-            return;
+            //string sqlString = "Select SoGioLam from TinhLuong where MaNV ='" + MaNV + "'";
+            //try { dbMain.LaySoTime(sqlString, CommandType.Text, ref SoTime); }
+            //catch { }
+            //return;
+
+
+            //return dbMain.MyExecuteNonQuery("uspGetLaySoTime", CommandType.StoredProcedure,
+            //    ref SoTime, new SqlParameter("MaNV", MaNV));
+
         }
     }
 }
