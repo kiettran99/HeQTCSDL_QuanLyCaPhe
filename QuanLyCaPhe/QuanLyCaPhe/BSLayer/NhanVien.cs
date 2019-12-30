@@ -87,49 +87,56 @@ namespace QuanLyCaPhe.BSLayer
 
         }
 
-        //public bool ThemNhanVien(string MaNV, string Ho, string TenNV, bool Nu, DateTime NgayNV, DateTime NgaySinh, string DiaChi, string SDT, string hinhanh, ref string error)
-        //{
-        //    string sqlString;
-        //    try
-        //    {
-        //        sqlString = $"Insert into NhanVien values('{MaNV.Trim()}', N'{Ho.Trim()}', N'{TenNV.Trim()}', N'{Nu}', N'{NgaySinh.ToShortDateString()}', N'{SDT.Trim()}', N'{DiaChi.Trim()}', N'{NgayNV.ToString()}',"
-        //            + $"(select BulkColumn from Openrowset(Bulk'{hinhanh}',single_Blob) as Image))";
-        //    }
-        //    catch (SqlException)
-        //    {
-        //        error = "Thêm không được";
-        //        return false;
-        //    }
-        //    error = "Thêm thành công";
-        //    return dbMain.MyExecuteNonQuery(sqlString, CommandType.Text, ref error);
-        //}
-
-        public bool ThemNhanVien(string MaNV,
-            string HoNV,
-            string TenNV,
-            bool Nu,
-            DateTime NgaySinh,
-            string DiaChi,
-            DateTime NgayBD,
-            string SDT,
-            
-            string HinhAnh,
-           
-            ref string error)
-
+        public bool ThemNhanVien(string MaNV, string Ho, string TenNV, bool Nu, DateTime NgayNV, DateTime NgaySinh, string DiaChi, string SDT, string hinhanh, ref string error)
         {
-            return dbMain.MyExecuteNonQuery("uspInsertNhanVien", CommandType.StoredProcedure, ref error,
-                new SqlParameter("@MaNV", MaNV),
-                new SqlParameter("@HoNV", HoNV),
-                new SqlParameter("@TenNV", TenNV),
-                new SqlParameter("@Nu", Nu),
-                new SqlParameter("@NgaySinh", NgaySinh),
-                new SqlParameter ("@DiaChi",DiaChi),
-                new SqlParameter("@SDT", SDT),
-                new SqlParameter("@NgayBD", NgayBD),
-                new SqlParameter("@HinhAnh", HinhAnh)
-              );
+            string sqlString;
+            try
+            {
+                if (hinhanh.Length > 0)
+                    sqlString = $"Insert into NhanVien values('{MaNV.Trim()}', N'{Ho.Trim()}', N'{TenNV.Trim()}', N'{Nu}', N'{NgaySinh.ToString("yyyy-MM-dd")}', N'{SDT.Trim()}', N'{DiaChi.Trim()}', N'{NgayNV.ToString("yyyy-MM-dd HH:mm:ss")}',"
+                    + $"(select BulkColumn from Openrowset(Bulk'{hinhanh}',single_Blob) as Image))";
+                else
+                    sqlString = $"Insert into NhanVien values('{MaNV.Trim()}', N'{Ho.Trim()}', N'{TenNV.Trim()}', N'{Nu}', N'{NgaySinh.ToString("yyyy-MM-dd")}', N'{SDT.Trim()}', N'{DiaChi.Trim()}', N'{NgayNV.ToString("yyyy-MM-dd HH:mm:ss")}', null)";
+
+                if (dbMain.MyExecuteNonQuery(sqlString, CommandType.Text, ref error) == true)
+                {
+                    error = "Thêm thành công";
+                }
+            }
+            catch (SqlException)
+            {
+                error = "Thêm không được";
+                return false;
+            }
+            return true;
         }
+
+        //public bool ThemNhanVien(string MaNV,
+        //    string HoNV,
+        //    string TenNV,
+        //    bool Nu,
+        //    DateTime NgaySinh,
+        //    string DiaChi,
+        //    DateTime NgayBD,
+        //    string SDT,
+
+        //    string HinhAnh,
+
+        //    ref string error)
+
+        //{
+        //    return dbMain.MyExecuteNonQuery("uspInsertNhanVien", CommandType.StoredProcedure, ref error,
+        //        new SqlParameter("@MaNV", MaNV),
+        //        new SqlParameter("@HoNV", HoNV),
+        //        new SqlParameter("@TenNV", TenNV),
+        //        new SqlParameter("@Nu", Nu),
+        //        new SqlParameter("@NgaySinh", NgaySinh),
+        //        new SqlParameter ("@DiaChi",DiaChi),
+        //        new SqlParameter("@SDT", SDT),
+        //        new SqlParameter("@NgayBD", NgayBD),
+        //        new SqlParameter("@HinhAnh", HinhAnh)
+        //      );
+        //}
 
 
         public bool XoaNhanVien(string MaNV, ref string error)

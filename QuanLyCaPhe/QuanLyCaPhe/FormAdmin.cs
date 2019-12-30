@@ -241,7 +241,7 @@ namespace QuanLyCaPhe
             btnXemDM.Enabled = false;
             btnLuuDM.Enabled = true;
             txtIDDM.ResetText();
-            txtTenDM.ResetText();           
+            txtTenDM.ResetText();
             int idDM = 1;
             if (dgvDanhMuc.Rows.Count > 1)
                 idDM = (int.Parse(dgvDanhMuc.Rows[dgvDanhMuc.Rows.Count - 2].Cells[0].Value.ToString()) + 1);
@@ -274,7 +274,7 @@ namespace QuanLyCaPhe
             btnXemDM.Enabled = false;
             btnXoaDM.Enabled = false;
             btnLuuDM.Enabled = true;
-           
+
         }
 
         private void btnXemDM_Click(object sender, EventArgs e)
@@ -305,11 +305,11 @@ namespace QuanLyCaPhe
                     BTLTA.SuaDanhMuc(txtIDDM.Text, txtTenDM.Text, ref err);
                     // Load lại DataGridView
                     LoadDataDM();
-                    
+
                 }
                 catch (Exception error)
                 {
-                    err= error.Message;
+                    err = error.Message;
                 }
                 MessageBox.Show(err);
             }
@@ -386,8 +386,8 @@ namespace QuanLyCaPhe
             txtTrangThaiB.ResetText();
             txtIDB.ResetText();
             txtTenB.ResetText();
-           
-            int idBan= 1;
+
+            int idBan = 1;
             if (dgvBanAn.Rows.Count > 1)
                 idBan = (int.Parse(dgvBanAn.Rows[dgvBanAn.Rows.Count - 2].Cells[0].Value.ToString()) + 1);
             txtIDB.Text = idBan.ToString();
@@ -467,7 +467,7 @@ namespace QuanLyCaPhe
         #endregion
 
         #region TabTaiKhoan
-       
+
         private void btnThemTK_Click(object sender, EventArgs e)
         {
             btnThemTK.Enabled = false;
@@ -484,7 +484,7 @@ namespace QuanLyCaPhe
             txtMaNVTK.Enabled = true;
 
         }
-      
+
 
         private void LoadTTTK()
         {
@@ -621,6 +621,16 @@ namespace QuanLyCaPhe
             btnReloadNV.Enabled = true;
             btnThemNV.Enabled = true;
             btnXoaNV.Enabled = true;
+
+            //Tạm không cho phép nhập dữ liệu cho đến khi nhấn nút thêm
+            txtMaNV.ReadOnly = true;
+            txtHoNV.ReadOnly = true;
+            txtTenNV.ReadOnly = true;
+            rdbNu.Enabled = false;
+            txtDienThoai.ReadOnly = true;
+            txtDiaChi.ReadOnly = true;
+            dtbNgayNV.Enabled = false;
+            dtbNgaySinh.Enabled = false;
         }
         private void LoadDataF()
         {
@@ -676,6 +686,16 @@ namespace QuanLyCaPhe
             dtbNgayNV.ResetText();
             dtbNgaySinh.ResetText();
 
+            //Tạm không cho phép nhập dữ liệu cho đến khi nhấn nút thêm
+            txtMaNV.ReadOnly = false;
+            txtHoNV.ReadOnly = false;
+            txtTenNV.ReadOnly = false;
+            rdbNu.Enabled = true;
+            txtDienThoai.ReadOnly = false;
+            txtDiaChi.ReadOnly = false;
+            dtbNgayNV.Enabled = true;
+            dtbNgaySinh.Enabled = true;
+
             int idNV = 1;
             if (dgvNhanVien.Rows.Count > 1)
                 idNV = (int.Parse(dgvNhanVien.Rows[dgvNhanVien.Rows.Count - 2].Cells[0].Value.ToString()) + 1);
@@ -685,10 +705,10 @@ namespace QuanLyCaPhe
         private void btnLuuNV_Click(object sender, EventArgs e)
         {
 
-            MemoryStream pic = new MemoryStream();           
+            MemoryStream pic = new MemoryStream();
             pictureBox1.Image.Save(pic, pictureBox1.Image.RawFormat);
-            BLNV.ThemNhanVien(txtMaNV.Text, txtHoNV.Text.Trim(), txtTenNV.Text.Trim(), rdbNu.Checked,
-           dtbNgaySinh.Value, txtDiaChi.Text.Trim(),dtbNgayNV.Value, txtDienThoai.Text.Trim(), tenanh, ref err);
+            BLNV.ThemNhanVien(txtMaNV.Text, txtHoNV.Text.Trim(), txtTenNV.Text.Trim(), rdbNu.Checked, dtbNgayNV.Value,
+           dtbNgaySinh.Value, txtDiaChi.Text.Trim(), txtDienThoai.Text.Trim(), tenanh, ref err);
             BLCHC.ThemNhanVien(txtMaNV.Text.Trim(), txtTenNV.Text.Trim(), ref err);
             BLTL.ThemNhanVien(txtMaNV.Text.Trim(), txtTenNV.Text.Trim(), ref err);
 
@@ -712,6 +732,16 @@ namespace QuanLyCaPhe
             btnHuyNV.Enabled = false;
             btnReloadNV.Enabled = true;
             btnThemNV.Enabled = true;
+
+            //Tạm không cho phép nhập dữ liệu cho đến khi nhấn nút thêm
+            txtMaNV.ReadOnly = true;
+            txtHoNV.ReadOnly = true;
+            txtTenNV.ReadOnly = true;
+            rdbNu.Enabled = false;
+            txtDienThoai.ReadOnly = true;
+            txtDiaChi.ReadOnly = true;
+            dtbNgayNV.Enabled = false;
+            dtbNgaySinh.Enabled = false;
         }
 
         private void btnXoaNV_Click(object sender, EventArgs e)
