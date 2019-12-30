@@ -25,6 +25,13 @@ go
 drop procedure if exists Read_LoaiThucAnTheoTen
 go
 
+create procedure Read_LoaiThucAnTheoTen @TenLoaiThucAn nvarchar(100)
+as
+begin
+	select IDLoaiThucAn from LoaiThucAn where TenLoaiThucAn = @TenLoaiThucAn
+end
+go
+
 --3. Sửa Loại thức ăn
 drop procedure if exists Update_LoaiThucAn
 go
