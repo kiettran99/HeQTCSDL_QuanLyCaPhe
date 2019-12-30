@@ -167,7 +167,8 @@ namespace QuanLyCaPhe
         {
             if (ThemF == true)
             {
-                BLTA.ThemThucAn(txtFID.Text, cmbDanhMucF.Text.Trim(), float.Parse(txtGiaF.Text.Trim()),
+                string IDDanhMuc = BTLTA.TimIDTheoTenLoaiThucAn(cmbDanhMucF.Text);
+                BLTA.ThemThucAn(txtFID.Text, IDDanhMuc, float.Parse(txtGiaF.Text.Trim()),
                    txtFName.Text.Trim(), ref err);
                 // Load lại DataGridView
                 LoadDataF();
@@ -642,6 +643,10 @@ namespace QuanLyCaPhe
                 dataTable = ds.Tables[0];
                 // đưa dữ liệu vào dataGridView
                 dgvThucAn.DataSource = dataTable;
+
+                //Lấy dữ liệu loại thức đổ vào combo box
+                cmbDanhMucF.DisplayMember = "TenLoaiThucAn";
+                cmbDanhMucF.DataSource = BTLTA.LayDanhMuc().Tables[0];
             }
             catch (Exception errr)
             {

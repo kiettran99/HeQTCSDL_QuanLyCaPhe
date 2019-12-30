@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAdmin));
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource2 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.DanhThu_ReportBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.QuanLyCaPheDataSet = new QuanLyCaPhe.QuanLyCaPheDataSet();
             this.tabControl = new System.Windows.Forms.TabControl();
@@ -67,10 +67,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.dgvThucAn = new System.Windows.Forms.DataGridView();
-            this.MaThucAn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TenMonAn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Gia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnLuuF = new System.Windows.Forms.Button();
             this.btnHuyF = new System.Windows.Forms.Button();
@@ -218,6 +214,10 @@
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.DanhThu_ReportTableAdapter = new QuanLyCaPhe.QuanLyCaPheDataSetTableAdapters.DanhThu_ReportTableAdapter();
+            this.MaThucAn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TenMonAn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Gia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DanhThu_ReportBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.QuanLyCaPheDataSet)).BeginInit();
             this.tabControl.SuspendLayout();
@@ -663,38 +663,6 @@
             this.dgvThucAn.Size = new System.Drawing.Size(746, 669);
             this.dgvThucAn.TabIndex = 0;
             this.dgvThucAn.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvThucAn_CellClick);
-            // 
-            // MaThucAn
-            // 
-            this.MaThucAn.DataPropertyName = "IDThucAn";
-            this.MaThucAn.HeaderText = "Mã Thức Ăn";
-            this.MaThucAn.MinimumWidth = 8;
-            this.MaThucAn.Name = "MaThucAn";
-            this.MaThucAn.Width = 50;
-            // 
-            // TenMonAn
-            // 
-            this.TenMonAn.DataPropertyName = "TenThucAn";
-            this.TenMonAn.HeaderText = "Tên Món Ăn";
-            this.TenMonAn.MinimumWidth = 8;
-            this.TenMonAn.Name = "TenMonAn";
-            this.TenMonAn.Width = 200;
-            // 
-            // Column9
-            // 
-            this.Column9.DataPropertyName = "IDLoaiThucAn";
-            this.Column9.HeaderText = "Loại Món Ăn";
-            this.Column9.MinimumWidth = 8;
-            this.Column9.Name = "Column9";
-            this.Column9.Width = 150;
-            // 
-            // Gia
-            // 
-            this.Gia.DataPropertyName = "Gia";
-            this.Gia.HeaderText = "Giá";
-            this.Gia.MinimumWidth = 8;
-            this.Gia.Name = "Gia";
-            this.Gia.Width = 105;
             // 
             // panel4
             // 
@@ -2276,9 +2244,9 @@
             // reportViewer1
             // 
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            reportDataSource2.Name = "DataSet1";
-            reportDataSource2.Value = this.DanhThu_ReportBindingSource;
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource2);
+            reportDataSource1.Name = "DataSet1";
+            reportDataSource1.Value = this.DanhThu_ReportBindingSource;
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "QuanLyCaPhe.Report1.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(4, 5);
             this.reportViewer1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -2290,6 +2258,38 @@
             // DanhThu_ReportTableAdapter
             // 
             this.DanhThu_ReportTableAdapter.ClearBeforeFill = true;
+            // 
+            // MaThucAn
+            // 
+            this.MaThucAn.DataPropertyName = "IDThucAn";
+            this.MaThucAn.HeaderText = "Mã Thức Ăn";
+            this.MaThucAn.MinimumWidth = 8;
+            this.MaThucAn.Name = "MaThucAn";
+            this.MaThucAn.Width = 50;
+            // 
+            // TenMonAn
+            // 
+            this.TenMonAn.DataPropertyName = "TenThucAn";
+            this.TenMonAn.HeaderText = "Tên Món Ăn";
+            this.TenMonAn.MinimumWidth = 8;
+            this.TenMonAn.Name = "TenMonAn";
+            this.TenMonAn.Width = 200;
+            // 
+            // Column9
+            // 
+            this.Column9.DataPropertyName = "TenLoaiThucAn";
+            this.Column9.HeaderText = "Loại Món Ăn";
+            this.Column9.MinimumWidth = 8;
+            this.Column9.Name = "Column9";
+            this.Column9.Width = 150;
+            // 
+            // Gia
+            // 
+            this.Gia.DataPropertyName = "Gia";
+            this.Gia.HeaderText = "Giá";
+            this.Gia.MinimumWidth = 8;
+            this.Gia.Name = "Gia";
+            this.Gia.Width = 105;
             // 
             // FormAdmin
             // 
@@ -2540,10 +2540,6 @@
         private System.Windows.Forms.TextBox txtMaNVTK;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.DataGridView dgvTK;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MaThucAn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TenMonAn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Gia;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column23;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column24;
@@ -2572,5 +2568,9 @@
         private System.Windows.Forms.BindingSource DanhThu_ReportBindingSource;
         private QuanLyCaPheDataSet QuanLyCaPheDataSet;
         private QuanLyCaPheDataSetTableAdapters.DanhThu_ReportTableAdapter DanhThu_ReportTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaThucAn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TenMonAn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Gia;
     }
 }

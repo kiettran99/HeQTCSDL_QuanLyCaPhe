@@ -28,7 +28,7 @@ create table NhanVien(
 	NgaySinh date,
 	SDT int,
 	DiaChi nvarchar(30),
-	NgayBD date,
+	NgayBD datetime,
 	HinhAnh image,
 
 	primary key(MaNV)

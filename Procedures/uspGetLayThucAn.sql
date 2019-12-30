@@ -7,7 +7,7 @@ GO
 CREATE PROC uspGetLayThucAn
 AS
 BEGIN
-	select * from ThucAn;
+	select IDThucAn, TenThucAn, TenLoaiThucAn, Gia from ThucAn join LoaiThucAn on ThucAn.IDLoaiThucAn = LoaiThucAn.IDLoaiThucAn;
 END
 --GO
 EXEC uspGetLayThucAn
