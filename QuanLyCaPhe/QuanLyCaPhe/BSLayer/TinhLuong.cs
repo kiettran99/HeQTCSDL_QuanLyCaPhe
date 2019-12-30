@@ -19,14 +19,37 @@ namespace QuanLyCaPhe.BSLayer
 
         public DataSet LayTTTL()
         {
-            return dbMain.ExecuteQueryDataSet("select * from TinhLuong", CommandType.Text);
+            return dbMain.ExecuteQueryDataSet("uspGetLayTTTL", CommandType.StoredProcedure);
+            
         }
-        public bool ThemNhanVien(string MaNV, string TenNV, ref string error)
+        public bool ThemNhanVien(ref string error,
+                
+            string MaNV,
+            string HoNV,
+            string TenNV,
+            bool Nu,
+            DateTime NgaySinh,
+            int SDT,
+            DateTime NgayBD,
+            byte HinhAnh,
+            TimeSpan GioIn,
+            TimeSpan GioOut)
+
         {
-            string sqlString;
-            sqlString = $"Insert into TinhLuong values('{MaNV}', N'{TenNV}',N'{0}',N'{0}')";
-            return dbMain.MyExecuteNonQuery(sqlString, CommandType.Text, ref error);
+            return db.CustomExecuteNonQuery("uspInsertNhanVien",CommandType.StoredProcedure,ref error,
+                new SqlParameter("@MaNV",MaNV),
+                new SqlParameter("@HoNV", HoNV),
+                new SqlParameter("@TenNV", TenNV),
+                new SqlParameter("@Nu", Nu),
+                new SqlParameter("@NgaySinh", NgaySinh),
+                new SqlParameter("@SDT", SDT),
+                new SqlParameter("@NgayBD", NgayBD),
+                new SqlParameter("@HinhAnh", HinhAnh),
+                new SqlParameter("@GioIn", GioIn),
+                new SqlParameter("@GioOut", GioOut));
         }
+            
+       
 
         public bool TinhLuongNhanVien(string MaNV, float sogiolam,float luong, ref string error)
         {
