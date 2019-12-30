@@ -32,6 +32,8 @@ namespace QuanLyCaPhe.DBLayer
                 conn.Close();
             conn.Open();
 
+            cmd.Parameters.Clear();
+
             cmd.CommandType = ct;
             cmd.CommandText = strSQL;
 

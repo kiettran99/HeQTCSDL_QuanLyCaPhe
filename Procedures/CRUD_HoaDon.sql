@@ -13,7 +13,17 @@ create procedure Create_HoaDon @IDHoaDon int,
 	@TinhTrang bit
 as
 begin
-	insert into HoaDon values(@idHoaDon, @NgayTaoHoaDon, @IDBanAn, @TongTien, @GiamGia, @TinhTrang)
+	insert into HoaDon values(@IDHoaDon, @NgayTaoHoaDon, @NgayKetThucHoaDon, @IDBanAn, @TongTien, @GiamGia, @TinhTrang)
+end
+go
+
+drop procedure if exists Create_HoaDonTheoBan
+go
+
+create procedure Create_HoaDonTheoBan @IDHoaDon int, @IDBanAn int
+as
+begin
+	insert into HoaDon values(@IDHoaDon, GETDATE(), null, @IDBanAn, 0, 0, 0)
 end
 go
 
@@ -28,15 +38,15 @@ begin
 end
 go
 
-drop procedure if exists Read_HoaDon_ID
+drop procedure if exists Read_HoaDon_IDBanAn
 go
 
-create procedure Read_HoaDon_ID @idHoaDon int
+create procedure Read_HoaDon_IDBanAn @idBanAn int
 as
 begin
 	select * 
 	from HoaDon
-	where IDHoaDon = @idHoaDon
+	where IDBanAn = @idBanAn and HoaDon.TinhTrang = 0
 end
 go
 
@@ -67,6 +77,5 @@ create procedure Delete_HoaDon @idHoaDon int
 as
 begin
 	delete from HoaDon 
-	where IDHoaDon = @idHoaDon
+	where IDHoaDon = @idHoaDon and HoaDon.TinhTrang = 0
 end
-go

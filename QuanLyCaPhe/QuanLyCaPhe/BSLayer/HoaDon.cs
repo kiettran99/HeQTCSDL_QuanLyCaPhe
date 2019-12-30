@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using QuanLyCaPhe.DBLayer;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace QuanLyCaPhe.BSLayer
 {
@@ -19,12 +20,14 @@ namespace QuanLyCaPhe.BSLayer
 
         public DataSet LayHoaDon()
         {
-            return db.ExecuteQueryDataSet("select * from HoaDon", CommandType.Text);
+            //return db.ExecuteQueryDataSet("select * from HoaDon", CommandType.Text);
+            return db.ExecuteQueryDataSet("Read_HoaDon", CommandType.StoredProcedure);
         }
 
         public int LayIDHoaDonTheoBan(int idBan)
         {
-            DataTable dt = db.ExecuteQueryDataSet($"select * from HoaDon where IDBanAn = '{idBan}' and HoaDon.TinhTrang = 0", CommandType.Text).Tables[0];
+            //DataTable dt = db.ExecuteQueryDataSet($"select * from HoaDon where IDBanAn = '{idBan}' and HoaDon.TinhTrang = 0", CommandType.Text).Tables[0];
+            DataTable dt = db.ExecuteQueryDataSet("Read_HoaDon_IDBanAn", CommandType.StoredProcedure, new SqlParameter("@idBanAn", idBan)).Tables[0];
             int id = -1;    //ID Hóa đơn mặc định không tìm thấy
             //Kiểm tra xem dt có dữ liệu hay không ?
             if (dt.Rows.Count > 0)
@@ -40,8 +43,8 @@ namespace QuanLyCaPhe.BSLayer
         public void ThemHoaDonTheoBan(int idBan, ref string error)
         {
             int maxID = MaxIDHoaDon(ref error) + 1;
-            string strSQL = $"Insert into HoaDon values({maxID}, getdate(), null, {idBan}, 0, 0, 0)";
-            db.MyExecuteNonQuery(strSQL, CommandType.Text, ref error);
+            //string strSQL = $"Insert into HoaDon values({maxID}, getdate(), null, {idBan}, 0, 0, 0)";
+            db.MyExecuteNonQuery("Create_HoaDonTheoBan", CommandType.StoredProcedure, ref error, new SqlParameter("@IDHoaDon", maxID), new SqlParameter("@IDBanAn", idBan));
         }
 
         public int MaxIDHoaDon(ref string error)
@@ -52,9 +55,9 @@ namespace QuanLyCaPhe.BSLayer
 
         public void XoaHoaDon(int idHoaDon, ref string error)
         {
-            string query = "";
-            query = $"delete from HoaDon where idHoaDon = {idHoaDon} and TinhTrang = 0";
-            db.MyExecuteNonQuery(query, CommandType.Text, ref err);
+            //string query = "";
+            //query = $"delete from HoaDon where idHoaDon = {idHoaDon} and TinhTrang = 0";
+            db.MyExecuteNonQuery("Delete_HoaDon", CommandType.StoredProcedure, ref err, new SqlParameter("@idHoaDon", idHoaDon));
         }
     }
 }
