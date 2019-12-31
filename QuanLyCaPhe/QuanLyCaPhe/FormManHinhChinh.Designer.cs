@@ -38,6 +38,7 @@
             this.menuNhanVien = new System.Windows.Forms.ToolStripMenuItem();
             this.menuThanhPho = new System.Windows.Forms.ToolStripMenuItem();
             this.menuHoaDon = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuKhachHang = new System.Windows.Forms.ToolStripMenuItem();
             this.trợGiúpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuHuongDanSuDung = new System.Windows.Forms.ToolStripMenuItem();
             this.menuThongTinUngDung = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,7 +62,6 @@
             this.SoLuong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Gia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.menuKhachHang = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -82,7 +82,6 @@
             this.menuAdmin});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Padding = new System.Windows.Forms.Padding(6, 2, 0, 2);
             this.menuStrip.Size = new System.Drawing.Size(1342, 33);
             this.menuStrip.TabIndex = 0;
             // 
@@ -147,6 +146,13 @@
             this.menuHoaDon.Size = new System.Drawing.Size(278, 34);
             this.menuHoaDon.Text = "Quản lý hóa đơn";
             this.menuHoaDon.Click += new System.EventHandler(this.menuHoaDon_Click);
+            // 
+            // menuKhachHang
+            // 
+            this.menuKhachHang.Name = "menuKhachHang";
+            this.menuKhachHang.Size = new System.Drawing.Size(278, 34);
+            this.menuKhachHang.Text = "Quản Lý Khách Hàng";
+            this.menuKhachHang.Click += new System.EventHandler(this.menuKhachHang_Click);
             // 
             // trợGiúpToolStripMenuItem
             // 
@@ -386,12 +392,6 @@
             this.Column1.MinimumWidth = 8;
             this.Column1.Name = "Column1";
             this.Column1.Width = 130;
-            // 
-            // menuKhachHang
-            // 
-            this.menuKhachHang.Name = "menuKhachHang";
-            this.menuKhachHang.Size = new System.Drawing.Size(278, 34);
-            this.menuKhachHang.Text = "Quản Lý Khách Hàng";
             // 
             // FormManHinhChinh
             // 
