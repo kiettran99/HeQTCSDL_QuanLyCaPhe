@@ -29,33 +29,33 @@ namespace QuanLyCaPhe.BSLayer
             sqlString = $"Insert into TinhLuong values('{MaNV}', N'{TenNV}',N'{0}',N'{0}')";
             return dbMain.MyExecuteNonQuery(sqlString, CommandType.Text, ref error);
         }
-        public bool ThemNhanVien(
+        //public bool ThemNhanVien(
                 
-            string MaNV,
-            string HoNV,
-            string TenNV,
-            bool Nu,
-            DateTime NgaySinh,
-            int SDT,
-            DateTime NgayBD,
-            byte HinhAnh,
-            TimeSpan GioIn,
-            TimeSpan GioOut,
-            ref string error)
+        //    string MaNV,
+        //    string HoNV,
+        //    string TenNV,
+        //    bool Nu,
+        //    DateTime NgaySinh,
+        //    int SDT,
+        //    DateTime NgayBD,
+        //    byte HinhAnh,
+        //    TimeSpan GioIn,
+        //    TimeSpan GioOut,
+        //    ref string error)
 
-        {
-            return dbMain.MyExecuteNonQuery("uspInsertNhanVien",CommandType.StoredProcedure,ref error,
-                new SqlParameter("@MaNV",MaNV),
-                new SqlParameter("@HoNV", HoNV),
-                new SqlParameter("@TenNV", TenNV),
-                new SqlParameter("@Nu", Nu),
-                new SqlParameter("@NgaySinh", NgaySinh),
-                new SqlParameter("@SDT", SDT),
-                new SqlParameter("@NgayBD", NgayBD),
-                new SqlParameter("@HinhAnh", HinhAnh),
-                new SqlParameter("@GioIn", GioIn),
-                new SqlParameter("@GioOut", GioOut));
-        }
+        //{
+        //    return dbMain.MyExecuteNonQuery("uspInsertNhanVien",CommandType.StoredProcedure,ref error,
+        //        new SqlParameter("@MaNV",MaNV),
+        //        new SqlParameter("@HoNV", HoNV),
+        //        new SqlParameter("@TenNV", TenNV),
+        //        new SqlParameter("@Nu", Nu),
+        //        new SqlParameter("@NgaySinh", NgaySinh),
+        //        new SqlParameter("@SDT", SDT),
+        //        new SqlParameter("@NgayBD", NgayBD),
+        //        new SqlParameter("@HinhAnh", HinhAnh),
+        //        new SqlParameter("@GioIn", GioIn),
+        //        new SqlParameter("@GioOut", GioOut));
+        //}
             
        
 
@@ -94,7 +94,7 @@ namespace QuanLyCaPhe.BSLayer
 
 
         }
-        public bool XoaNV(string MaNV,ref string error)
+        public bool XoaNV(string MaNV, ref string error)
         {
             //string sqlString = $"delete from TinhLuong where MaNV = '{MaNV}'";
 
@@ -106,10 +106,10 @@ namespace QuanLyCaPhe.BSLayer
 
         public void LaySoTime(string MaNV, ref float SoTime)
         {
-            //string sqlString = "Select SoGioLam from TinhLuong where MaNV ='" + MaNV + "'";
-            //try { dbMain.LaySoTime(sqlString, CommandType.Text, ref SoTime); }
-            //catch { }
-            //return;
+            string sqlString = "Select SoGioLam from TinhLuong where MaNV ='" + MaNV + "'";
+            try { dbMain.LaySoTime(sqlString, CommandType.Text, ref SoTime); }
+            catch { }
+            return;
 
 
             //return dbMain.MyExecuteNonQuery("uspGetLaySoTime", CommandType.StoredProcedure,

@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 using QuanLyCaPhe.DBLayer;
 using System.Data.SqlClient;
 using System.Data;
+using Microsoft.Build.Tasks;
+
 namespace QuanLyCaPhe.BSLayer
 {
     class ThucAn
     {
         DBMain dbMain = null;
+        string err = "";
         public ThucAn()
         {
             dbMain = new DBMain();
@@ -20,7 +23,7 @@ namespace QuanLyCaPhe.BSLayer
         {
             //return dbMain.ExecuteQueryDataSet("select *from ThucAn", CommandType.Text);
 
-            return dbMain.ExecuteQueryDataSet("uspGetLayThucAn", CommandType.StoredProcedure);
+          return dbMain.ExecuteQueryDataSet("uspGetLayThucAn", CommandType.StoredProcedure);
         }
 
         public DataSet LayThucAnTheoLoai(string tenLoaiThucAn)
@@ -30,93 +33,70 @@ namespace QuanLyCaPhe.BSLayer
             return dbMain.ExecuteQueryDataSet("uspGetLayThucAn_ByTenLoaiThucAn", CommandType.StoredProcedure, new SqlParameter("@TenLoaiThucAn", tenLoaiThucAn));
         }
 
-        public bool ThemThucAn(string MaThucAn, string DanhMuc, float Gia, string TenMon, ref string error)
+        //public bool ThemThucAn(string MaThucAn, string DanhMuc, float Gia, string TenMon)
+        //{
+        //    string sqlString;
+        //    try
+        //    {
+        //        sqlString = $"Insert into ThucAn values(N'{MaThucAn.Trim()}',  N'{TenMon.ToString()}', N'{DanhMuc.Trim()}', '{Gia}')";
+        //        err = "Thêm thành công";
+        //    }
+        //    catch (SqlException)
+        //    {
+        //        err = "Thêm không được";
+        //        return false;
+        //    }
+
+        //    return dbMain.MyExecuteNonQuery(sqlString, CommandType.Text, ref err);
+        //}
+        
+
+        public bool ThemThucAn(string MaThucAn, string DanhMuc, float Gia, string TenMon)
         {
-            string sqlString;
             try
             {
-                sqlString = $"Insert into ThucAn values(N'{MaThucAn.Trim()}',  N'{TenMon.ToString()}', N'{DanhMuc.Trim()}', '{Gia}')";
-                error = "Thêm thành công";
+                return dbMain.MyExecuteNonQuery("Create_ThucAn", CommandType.StoredProcedure, ref err, new SqlParameter("@IDThucAn", MaThucAn), new SqlParameter("@IDLoaiThucAn", DanhMuc), new SqlParameter("@Gia", Gia), new SqlParameter("@TenMonAn", TenMon));
+                err = "Thêm thành công";
+            }
+            catch (SqlException err1)
+            {
+                err = err1.Message;
+                return false;
+            }
+        }
+        public bool SuaThucAn(string MaThucAn, string DanhMuc, float Gia, string TenMon)
+        {
+            bool f = false;
+            try
+            {
+                f = dbMain.MyExecuteNonQuery("Update_ThucAn", CommandType.StoredProcedure, ref err, new SqlParameter("@IDThucAn", MaThucAn), new SqlParameter("@IDLoaiThucAn", DanhMuc), new SqlParameter("@Gia", Gia), new SqlParameter("@TenMonAn", TenMon));
+                err = "Sửa thành công";
+                return f;
             }
             catch (SqlException)
             {
-                error = "Thêm không được";
-                return false;
+                err = "Sửa không được";
+                return f;
             }
-
-            return dbMain.MyExecuteNonQuery(sqlString, CommandType.Text, ref error);
         }
-
-        public bool ThemThucAn(ref string error,
-           int IDHoaDon,
-          int IDThucAn,
-         string TenThucAn,
-        int IDLoaiThucAn,
-        float Gia,
-        string TenLoaiThucAn,
-        int SoLuong)
-        {
-            //string sqlString;
-            //try
-            //{
-            //    sqlString = $"Insert into ThucAn values(N'{MaThucAn.Trim()}',  N'{TenMon.ToString()}', N'{DanhMuc.Trim()}', '{Gia}')";
-            //    error = "Thêm thành công";
-            //}
-            //catch (SqlException)
-            //{
-            //    error = "Thêm không được";
-            //    return false;
-            //}
-
-            //return dbMain.MyExecuteNonQuery(sqlString, CommandType.Text, ref error);
-            return dbMain.MyExecuteNonQuery("uspInsertThucAn", CommandType.StoredProcedure, ref error,
-                  new SqlParameter("@IDHoaDon", IDHoaDon),
-                  new SqlParameter("@IDThucAn", IDThucAn),
-                  new SqlParameter("@TenThucAn", TenThucAn),
-                  new SqlParameter("@IDLoaiThucAn", IDLoaiThucAn),
-                  new SqlParameter("@Gia", Gia),
-                  new SqlParameter("@TenLoaiThucAn", TenLoaiThucAn),
-                  new SqlParameter("@SoLuong", SoLuong));
-
-
-
-        }
-
-        public bool SuaThucAn(string MaThucAn, string DanhMuc, string Gia, string TenMon, ref string error)
-        {
-            string sqlString;
-            try
-            {
-                sqlString = "Update ThucAn Set TenThucAn = N'" + TenMon + "',IDLoaiThucAn=N'" + int.Parse(DanhMuc) +
-                "',Gia='" + float.Parse(Gia) + "'where IDThucAn = '" + int.Parse(MaThucAn) + "'";
-                error = "Sửa thành công";
-            }
-            catch (SqlException)
-            {
-                error = "Sửa không được";
-                return false;
-            }
-
-            return dbMain.MyExecuteNonQuery(sqlString, CommandType.Text, ref error);
-        }
-        public bool SuaThucAn(ref string error,
-           int IDHoaDon,
-          int IDThucAn,
-         string TenThucAn,
-        int IDLoaiThucAn,
-        float Gia,
-        string TenLoaiThucAn,
-        int SoLuong)
-        {     
-            return dbMain.MyExecuteNonQuery("uspUpdateThucAn", CommandType.StoredProcedure, ref error,
-                    new SqlParameter("@IDHoaDon", IDHoaDon),
-                    new SqlParameter("@IDThucAn", IDThucAn),
-                    new SqlParameter("@TenThucAn", TenThucAn),
-                    new SqlParameter("@IDLoaiThucAn", IDLoaiThucAn),
-                    new SqlParameter("@Gia", Gia),
-                    new SqlParameter("@TenLoaiThucAn", TenLoaiThucAn),
-                    new SqlParameter("@SoLuong", SoLuong));
-        }
+        //public bool SuaThucAn(ref string error,
+        //   int IDHoaDon,
+        //  int IDThucAn,
+        // string TenThucAn,
+        //int IDLoaiThucAn,
+        //float Gia,
+        //string TenLoaiThucAn,
+        //int SoLuong)
+        //{     
+        //    return dbMain.MyExecuteNonQuery("uspUpdateThucAn", CommandType.StoredProcedure, ref error,
+        //            new SqlParameter("@IDHoaDon", IDHoaDon),
+        //            new SqlParameter("@IDThucAn", IDThucAn),
+        //            new SqlParameter("@TenThucAn", TenThucAn),
+        //            new SqlParameter("@IDLoaiThucAn", IDLoaiThucAn),
+        //            new SqlParameter("@Gia", Gia),
+        //            new SqlParameter("@TenLoaiThucAn", TenLoaiThucAn),
+        //            new SqlParameter("@SoLuong", SoLuong));
+        //}
         public bool XoaThucAn(string MaThucAn, ref string error)
         {
             //string sqlString = $"delete from ThucAn where IDThucAn = '{MaThucAn}'";
@@ -125,15 +105,20 @@ namespace QuanLyCaPhe.BSLayer
             return dbMain.MyExecuteNonQuery("uspDeleteThucAn", CommandType.StoredProcedure, ref error, new SqlParameter("IDThucAn", MaThucAn));
         }
 
-        public int TimIDThucAn(string tenThucAn, ref string error)
+        public int TimIDThucAn(string tenThucAn)
         {
-            string strSQL = $"select IDThucAn from ThucAn where TenThucAn = N'{tenThucAn}'";
-            return (int)dbMain.FirstRowQuery(strSQL, CommandType.Text, ref error);
+            return Convert.ToInt32(dbMain.FirstRowQuery($"select * from dbo.ufnTimIDThucAn(N'{tenThucAn}')", CommandType.Text, ref err));
+        }
+
+        public int TimMaxIDThucAn()
+        {
+            return (int)dbMain.FirstRowQuery($"select * from dbo.ufnTimMaxIDThucAn()", CommandType.Text, ref err);
         }
 
         public DataSet TimKimF(string TenThucAn)
         {
-            return dbMain.ExecuteQueryDataSet($"select *from ThucAn where TenThucAn like N'%{TenThucAn}%'", CommandType.Text);
+            return dbMain.ExecuteQueryDataSet($"select * from dbo.ufnTimFThucAn(N'{TenThucAn}')", CommandType.Text);
         }
     }
+
 }

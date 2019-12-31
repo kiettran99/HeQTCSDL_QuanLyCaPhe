@@ -114,7 +114,7 @@ namespace QuanLyCaPhe
 
             //Lấy ID Hóa đơn của bàn
             int idHoaDon = hoadon.LayIDHoaDonTheoBan(ban.Id);
-            int idFood = thucan.TimIDThucAn(cmbmonan.GetItemText(cmbmonan.SelectedItem), ref error);
+            int idFood = thucan.TimIDThucAn(cmbmonan.GetItemText(cmbmonan.SelectedItem));
             int count = (int)nudThemmon.Value;
 
             //Kiểm tra xem đã có sẵn hóa đơn chưa, nếu mới tạo thêm hóa đơn
@@ -282,7 +282,7 @@ namespace QuanLyCaPhe
                 {
                     int r = dgvhoadon.CurrentCell.RowIndex;
                     string tenThucAn = dgvhoadon.Rows[r].Cells[1].Value.ToString();
-                    int idThucAn = thucan.TimIDThucAn(tenThucAn, ref error);
+                    int idThucAn = thucan.TimIDThucAn(tenThucAn);
                     int idBan = (dgvhoadon.Tag as Ban).Id;
                     chitiethd.XoaChiTietHoaDon(idBan, idThucAn, ref error);
                     HienThiHoaDon((dgvhoadon.Tag as Ban).Id);

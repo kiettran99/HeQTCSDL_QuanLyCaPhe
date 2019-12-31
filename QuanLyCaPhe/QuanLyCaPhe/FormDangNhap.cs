@@ -41,7 +41,8 @@ namespace QuanLyCaPhe
                 //Thoát form đăng nhập khi đăng nhập thành công
                 this.Close();
             }
-            MessageBox.Show(err);
+        
+            
         }
 
         private void btnThoat_Click(object sender, EventArgs e)
@@ -62,6 +63,11 @@ namespace QuanLyCaPhe
         private void FormDangNhap_Load(object sender, EventArgs e)
         {
             txtTen.Focus();
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

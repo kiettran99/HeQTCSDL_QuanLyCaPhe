@@ -13,7 +13,8 @@ RETURN (SELECT IDThucAn
 		where TenThucAn =@TenThucAn)
 GO
 --TEST
-SELECT * FROM ufnTimIDThucAn('Xoài');
+SELECT * FROM ufnTimIDThucAn('7UP');
+select *from ThucAn
 
 --tìm tên thức ăn thông qua tên
 USE QuanLyCaPhe
@@ -29,4 +30,4 @@ RETURN (SELECT *
 		FROM dbo.ThucAn AS ThucAn
 		where TenThucAn like @TenThucAn)
 GO
-SELECT * FROM ufnTimFThucAn('Xoài');
+SELECT * FROM ufnTimFThucAn('7UP');

@@ -107,8 +107,9 @@ namespace QuanLyCaPhe
             cmbDanhMucF.ResetText();
             txtGiaF.ResetText();
             int idTA = 1;
-            if (dgvThucAn.Rows.Count > 1)
-                idTA = (int.Parse(dgvThucAn.Rows[dgvThucAn.Rows.Count - 2].Cells[0].Value.ToString()) + 1);
+            //if (dgvThucAn.Rows.Count > 1)
+            //    idTA = (int.Parse(dgvThucAn.Rows[dgvThucAn.Rows.Count - 2].Cells[0].Value.ToString()) + 1);
+            idTA = BLTA.TimMaxIDThucAn() + 1;
             txtFID.Text = idTA.ToString();
 
         }
@@ -118,10 +119,10 @@ namespace QuanLyCaPhe
             try
             {
                 int r = dgvThucAn.CurrentCell.RowIndex;
-                txtFID.Text = dgvThucAn.Rows[r].Cells[0].Value.ToString();
-                txtFName.Text = dgvThucAn.Rows[r].Cells[1].Value.ToString();
-                cmbDanhMucF.Text = dgvThucAn.Rows[r].Cells[2].Value.ToString();
-                txtGiaF.Text = dgvThucAn.Rows[r].Cells[3].Value.ToString();
+                txtFID.Text = dgvThucAn.Rows[r].Cells["MaThucAn"].Value.ToString();
+                txtFName.Text = dgvThucAn.Rows[r].Cells["TenMonAn"].Value.ToString();
+                cmbDanhMucF.Text = dgvThucAn.Rows[r].Cells["Column9"].Value.ToString();
+                txtGiaF.Text = dgvThucAn.Rows[r].Cells["Gia"].Value.ToString();
             }
             catch
             {
@@ -165,11 +166,11 @@ namespace QuanLyCaPhe
         }
         private void btnLuuF_Click(object sender, EventArgs e)
         {
+            string IDDanhMuc = BTLTA.TimIDTheoTenLoaiThucAn(cmbDanhMucF.Text);
             if (ThemF == true)
-            {
-                string IDDanhMuc = BTLTA.TimIDTheoTenLoaiThucAn(cmbDanhMucF.Text);
-                BLTA.ThemThucAn(txtFID.Text, IDDanhMuc, float.Parse(txtGiaF.Text.Trim()),
-                   txtFName.Text.Trim(), ref err);
+            {             
+                BLTA.ThemThucAn(txtFID.Text.Trim(), IDDanhMuc, float.Parse(txtGiaF.Text.Trim()), txtFName.Text.Trim());
+                 
                 // Load lại DataGridView
                 LoadDataF();
                 // THông Báo
@@ -177,7 +178,7 @@ namespace QuanLyCaPhe
             }
             else
             {
-                BLTA.SuaThucAn(txtFID.Text.Trim(), cmbDanhMucF.Text.Trim(), txtGiaF.Text.Trim(), txtFName.Text.Trim(), ref err);
+                BLTA.SuaThucAn(txtFID.Text.Trim(), IDDanhMuc, float.Parse(txtGiaF.Text.Trim()), txtFName.Text.Trim());
                 LoadDataF();
                 MessageBox.Show(err);
             }
@@ -994,6 +995,11 @@ namespace QuanLyCaPhe
             // TODO: This line of code loads data into the 'QuanLyCaPheDataSet.DanhThu_Report' table. You can move, or remove it, as needed.
             this.DanhThu_ReportTableAdapter.Fill(this.QuanLyCaPheDataSet.DanhThu_Report, dtpNgayTaoHoaDon.Value, dtpNgayKetThucHoaDon.Value);
             this.reportViewer1.RefreshReport();
+        }
+
+        private void txtFID_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void btnSua_Click(object sender, EventArgs e)
