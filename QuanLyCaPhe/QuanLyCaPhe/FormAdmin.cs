@@ -851,14 +851,14 @@ namespace QuanLyCaPhe
                 TimeSpan timein = new TimeSpan();
                 TimeSpan timeout = new TimeSpan();
 
-                BLTL.LayDuLieu(txtMaNVL.Text.Trim(), ref timein, ref timeout);
+                BLTL.LayDuLieu(txtMaNVCC.Text.Trim(), ref timein, ref timeout);
 
                 float Hour = -float.Parse(timein.Hours.ToString()) + float.Parse(timeout.Hours.ToString());
                 float Minute = -float.Parse(timein.Minutes.ToString()) + float.Parse(timeout.Minutes.ToString());
                 float Millisecond = -float.Parse(timein.Milliseconds.ToString()) + float.Parse(timeout.Milliseconds.ToString());
                 Hour += Minute / 60 + Millisecond / 3600;
                 float sotime = 0;
-                BLTL.LaySoTime(txtMaNVL.Text.Trim(), ref sotime);
+                BLTL.LaySoTime(txtMaNVCC.Text.Trim(), ref sotime);
                 BLTL.TinhLuongNhanVien(txtMaNVCC.Text.Trim(), Hour + sotime, 0, ref error);
                 LoadDataCHC();
                 MessageBox.Show(err);
@@ -1000,6 +1000,11 @@ namespace QuanLyCaPhe
         }
 
         private void txtFID_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtMaNVCC_TextChanged(object sender, EventArgs e)
         {
 
         }

@@ -67,6 +67,10 @@
             this.label10 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.dgvThucAn = new System.Windows.Forms.DataGridView();
+            this.MaThucAn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TenMonAn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Gia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnLuuF = new System.Windows.Forms.Button();
             this.btnHuyF = new System.Windows.Forms.Button();
@@ -214,10 +218,6 @@
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.DanhThu_ReportTableAdapter = new QuanLyCaPhe.QuanLyCaPheDataSetTableAdapters.DanhThu_ReportTableAdapter();
-            this.MaThucAn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TenMonAn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Gia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DanhThu_ReportBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.QuanLyCaPheDataSet)).BeginInit();
             this.tabControl.SuspendLayout();
@@ -334,7 +334,7 @@
             // btnThongKe
             // 
             this.btnThongKe.BackColor = System.Drawing.Color.Silver;
-            this.btnThongKe.Font = new System.Drawing.Font("Monotype Corsiva", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThongKe.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThongKe.Location = new System.Drawing.Point(381, 5);
             this.btnThongKe.Margin = new System.Windows.Forms.Padding(4);
             this.btnThongKe.Name = "btnThongKe";
@@ -358,6 +358,7 @@
             // 
             // dtpNgayTaoHoaDon
             // 
+            this.dtpNgayTaoHoaDon.CalendarFont = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpNgayTaoHoaDon.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpNgayTaoHoaDon.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpNgayTaoHoaDon.Location = new System.Drawing.Point(3, 4);
@@ -664,6 +665,38 @@
             this.dgvThucAn.Size = new System.Drawing.Size(663, 535);
             this.dgvThucAn.TabIndex = 0;
             this.dgvThucAn.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvThucAn_CellClick);
+            // 
+            // MaThucAn
+            // 
+            this.MaThucAn.DataPropertyName = "IDThucAn";
+            this.MaThucAn.HeaderText = "Mã Thức Ăn";
+            this.MaThucAn.MinimumWidth = 8;
+            this.MaThucAn.Name = "MaThucAn";
+            this.MaThucAn.Width = 50;
+            // 
+            // TenMonAn
+            // 
+            this.TenMonAn.DataPropertyName = "TenThucAn";
+            this.TenMonAn.HeaderText = "Tên Món Ăn";
+            this.TenMonAn.MinimumWidth = 8;
+            this.TenMonAn.Name = "TenMonAn";
+            this.TenMonAn.Width = 200;
+            // 
+            // Column9
+            // 
+            this.Column9.DataPropertyName = "TenLoaiThucAn";
+            this.Column9.HeaderText = "Loại Món Ăn";
+            this.Column9.MinimumWidth = 8;
+            this.Column9.Name = "Column9";
+            this.Column9.Width = 150;
+            // 
+            // Gia
+            // 
+            this.Gia.DataPropertyName = "Gia";
+            this.Gia.HeaderText = "Giá";
+            this.Gia.MinimumWidth = 8;
+            this.Gia.Name = "Gia";
+            this.Gia.Width = 105;
             // 
             // panel4
             // 
@@ -1819,6 +1852,7 @@
             this.txtMaNVCC.Name = "txtMaNVCC";
             this.txtMaNVCC.Size = new System.Drawing.Size(263, 30);
             this.txtMaNVCC.TabIndex = 3;
+            this.txtMaNVCC.TextChanged += new System.EventHandler(this.txtMaNVCC_TextChanged);
             // 
             // label21
             // 
@@ -2263,38 +2297,6 @@
             // DanhThu_ReportTableAdapter
             // 
             this.DanhThu_ReportTableAdapter.ClearBeforeFill = true;
-            // 
-            // MaThucAn
-            // 
-            this.MaThucAn.DataPropertyName = "IDThucAn";
-            this.MaThucAn.HeaderText = "Mã Thức Ăn";
-            this.MaThucAn.MinimumWidth = 8;
-            this.MaThucAn.Name = "MaThucAn";
-            this.MaThucAn.Width = 50;
-            // 
-            // TenMonAn
-            // 
-            this.TenMonAn.DataPropertyName = "TenThucAn";
-            this.TenMonAn.HeaderText = "Tên Món Ăn";
-            this.TenMonAn.MinimumWidth = 8;
-            this.TenMonAn.Name = "TenMonAn";
-            this.TenMonAn.Width = 200;
-            // 
-            // Column9
-            // 
-            this.Column9.DataPropertyName = "TenLoaiThucAn";
-            this.Column9.HeaderText = "Loại Món Ăn";
-            this.Column9.MinimumWidth = 8;
-            this.Column9.Name = "Column9";
-            this.Column9.Width = 150;
-            // 
-            // Gia
-            // 
-            this.Gia.DataPropertyName = "Gia";
-            this.Gia.HeaderText = "Giá";
-            this.Gia.MinimumWidth = 8;
-            this.Gia.Name = "Gia";
-            this.Gia.Width = 105;
             // 
             // FormAdmin
             // 
