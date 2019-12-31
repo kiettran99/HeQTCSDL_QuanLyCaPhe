@@ -12,9 +12,15 @@ namespace QuanLyCaPhe.BSLayer
     class DangNhap
     {
         DBMain dbMain = null;
+        string err = "";
         public DangNhap()
         {
             dbMain = new DBMain();
+        }
+
+        public int TimMaNVTheoTaiKhoan(string taikhoan)
+        {
+            return (int)dbMain.FirstRowQuery($"select MaNV from DangNhap where TaiKhoan = N'{taikhoan}'", CommandType.Text, ref err);
         }
 
         public bool KiemTra(string tk, string mk, ref string err, ref int MaNV)

@@ -22,6 +22,7 @@ namespace QuanLyCaPhe
         int idBan;
         float TongTienGoc = 0;
         //Biến Tĩnh Trạng Thái
+        public static int IDNguoiDangNhap = -1;
         public static QuyenTruyCap quyentruycap = QuyenTruyCap.Khong;
 
         public FormManHinhChinh()
@@ -183,6 +184,8 @@ namespace QuanLyCaPhe
                 menuDangNhap.Enabled = true;
 
                 flpnlBanAn.Controls.Clear();
+
+                IDNguoiDangNhap = -1;
 
                 quyentruycap = QuyenTruyCap.Khong;
 

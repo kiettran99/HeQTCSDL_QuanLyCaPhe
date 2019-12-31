@@ -15,6 +15,7 @@ namespace QuanLyCaPhe
     {
         DataTable dt = null;
         KhachHang kh = null;
+        ThanhPho tp = null;
         bool them = false;
         string error;
 
@@ -22,6 +23,7 @@ namespace QuanLyCaPhe
         {
             InitializeComponent();
             kh = new KhachHang();
+            tp = new ThanhPho();
             cbGioiTinh.SelectedIndex = 0;
         }
 
@@ -46,6 +48,10 @@ namespace QuanLyCaPhe
                 btnHuy.Enabled = false;
                 cbGioiTinh.SelectedIndex = 0;
 
+                //Load Dữ liệu Thành Phố lên combo box
+                cmbThanhPho.DataSource = tp.LayThanhPho().Tables[0];
+                cmbThanhPho.DisplayMember = "TenThanhPho";
+                cmbThanhPho.ValueMember = "MaThanhPho";
                 DgvKH_CellClick(null, null);
             }
             catch (Exception errr)
@@ -94,8 +100,7 @@ namespace QuanLyCaPhe
             {
                 if (them)
                 {
-
-                    kh.ThemKhachHang(tbMKH.Text, tbHKH.Text, tbTen.Text, tbSDT.Text, tbDiaChi.Text, cbGioiTinh.Text, dtNgaySinh.Value, ref error);
+                    kh.ThemKhachHang(tbMKH.Text, tbHKH.Text, tbTen.Text, tbSDT.Text, tbDiaChi.Text, cbGioiTinh.Text, dtNgaySinh.Value, Convert.ToInt32(cmbThanhPho.SelectedValue.ToString()), ref error);
                     // Load lại DataGridView
                     LoadData();
                     // THông Báo
@@ -104,7 +109,7 @@ namespace QuanLyCaPhe
                 else
                 {
                     int r = DgvKH.CurrentCell.RowIndex;
-                    kh.SuaKhachHang(tbMKH.Text, tbHKH.Text, tbTen.Text, tbSDT.Text, tbDiaChi.Text, cbGioiTinh.Text, dtNgaySinh.Value, ref error);
+                    kh.SuaKhachHang(tbMKH.Text, tbHKH.Text, tbTen.Text, tbSDT.Text, tbDiaChi.Text, cbGioiTinh.Text, dtNgaySinh.Value, Convert.ToInt32(cmbThanhPho.ValueMember.ToString()), ref error);
                     // Load lại DataGridView
                     LoadData();
                     // THông Báo
@@ -170,6 +175,7 @@ namespace QuanLyCaPhe
                 dtNgaySinh.Value = (DateTime)DgvKH.Rows[r].Cells[4].Value;
                 tbSDT.Text = DgvKH.Rows[r].Cells[5].Value.ToString();
                 tbDiaChi.Text = DgvKH.Rows[r].Cells[6].Value.ToString();
+                cmbThanhPho.Text = DgvKH.Rows[r].Cells["TenThanhPho"].Value.ToString();
             }
             catch { }
         }
