@@ -11,6 +11,7 @@ namespace QuanLyCaPhe.BSLayer
     class ThanhPho
     {
         DBMain dbMain = null;
+        string err = "";
         public ThanhPho()
         {
             dbMain = new DBMain();
@@ -20,6 +21,12 @@ namespace QuanLyCaPhe.BSLayer
         {
             return dbMain.ExecuteQueryDataSet("select *from ThanhPho", CommandType.Text);
         }
+
+        public int TimIDThanhPhoTheoTen(string tenThanhPho)
+        {
+            return (int)dbMain.FirstRowQuery($"select distinct MaThanhPho from ThanhPho where ThanhPho.TenThanhPho = N'{tenThanhPho}'", CommandType.Text, ref err);
+        }
+
         public bool ThemThanhPho(string TenTP, ref string error)
         {
             Random rd = new Random();

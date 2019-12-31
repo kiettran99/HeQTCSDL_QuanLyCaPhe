@@ -30,12 +30,14 @@ namespace QuanLyCaPhe
                 {
                     FormAdmin formAdmin = new FormAdmin();
                     formAdmin.ShowDialog();
+                    FormManHinhChinh.IDNguoiDangNhap = 0;   //Admin
                     FormManHinhChinh.quyentruycap = QuyenTruyCap.Administrator;
                 }
                 else
                 {
                     FormNhanVien formNhanVien = new FormNhanVien();
                     formNhanVien.ShowDialog();
+                    FormManHinhChinh.IDNguoiDangNhap = DN.TimMaNVTheoTaiKhoan(txtTen.Text.Trim());   //Admin
                     FormManHinhChinh.quyentruycap = QuyenTruyCap.NhanVien;
                 }
                 //Thoát form đăng nhập khi đăng nhập thành công

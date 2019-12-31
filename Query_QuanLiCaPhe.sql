@@ -6,6 +6,22 @@ use QuanLyCaPhe
 
 go
 
+drop table if exists ThanhPho
+drop table if exists KhachHang
+
+create table ThanhPho (
+	MaThanhPho int,
+	TenThanhPho nvarchar(20),
+	primary key(MaThanhPho)
+)
+
+delete from ThanhPho
+
+insert into ThanhPho values('1',N'Mỹ Tho')
+insert into ThanhPho values('2',N'Trà Vinh')
+insert into ThanhPho values('3',N'Bến Tre')
+insert into ThanhPho values('6',N'Hồ Chí Minh')
+
 create table KhachHang (
 	MaKH int not null,
 	HoKH nvarchar(20),
@@ -14,11 +30,14 @@ create table KhachHang (
 	NgaySinh date,
 	SDT int,
 	DiaChi nvarchar(30),
-	primary key(MaKH)
+	MaThanhPho int,
+	primary key(MaKH),
+	constraint FK_KhachHang_ThanhPho foreign key (MaThanhPho) references ThanhPho(MaThanhPho)
 )
-insert into KhachHang values(153165, N'Nguyen ', N'Huy', N'Nam', '1997-12-05', '0904567841', N'92 Hai Ba Trung Ho Chi Minh')
-insert into KhachHang values(222415, N'Nguyen ', N'Huy', N'Võ', '1998-11-11', '0904567841', N'Gò Vấp Ho Chi Minh')
-insert into KhachHang values(123455, N'Nguyen ', N'Thị', N'Cúc', '1997-12-05', '0904567841', N'9 Hoàng Diệu 2 Ho Chi Minh')
+
+insert into KhachHang values(153165, N'Nguyen ', N'Huy', N'Nam', '1997-12-05', '0904567841', N'92 Hai Ba Trung Ho Chi Minh', '1')
+insert into KhachHang values(222415, N'Nguyen ', N'Huy', N'Võ', '1998-11-11', '0904567841', N'Gò Vấp Ho Chi Minh', '2')
+insert into KhachHang values(123455, N'Nguyen ', N'Thị', N'Cúc', '1997-12-05', '0904567841', N'9 Hoàng Diệu 2 Ho Chi Minh', '3')
 
 create table NhanVien(
 	MaNV int not null,
@@ -56,15 +75,6 @@ create table DangNhap(
 )
 insert into DangNhap values(N'admin',N'admin','0');
 insert into DangNhap values(N'nv1',N'nv1','1');
-create table ThanhPho (
-	MaThanhPho int,
-	TenThanhPho nvarchar(20),
-	primary key(TenThanhPho)
-)
-
-insert into ThanhPho values('1232123',N'Mỹ Tho')
-insert into ThanhPho values('1223123',N'Trà Vinh')
-insert into ThanhPho values('1233433',N'Bến Tre')
 
 create table BanAn(
 	IDBanAn int not null,					
