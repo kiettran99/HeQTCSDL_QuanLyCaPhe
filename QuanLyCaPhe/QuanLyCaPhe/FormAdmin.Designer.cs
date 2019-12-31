@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAdmin));
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource2 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.DanhThu_ReportBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.QuanLyCaPheDataSet = new QuanLyCaPhe.QuanLyCaPheDataSet();
             this.tabControl = new System.Windows.Forms.TabControl();
@@ -348,7 +348,7 @@
             // 
             this.dtpNgayKetThucHoaDon.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.dtpNgayKetThucHoaDon.CalendarTitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dtpNgayKetThucHoaDon.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpNgayKetThucHoaDon.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpNgayKetThucHoaDon.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpNgayKetThucHoaDon.Location = new System.Drawing.Point(691, 4);
             this.dtpNgayKetThucHoaDon.Margin = new System.Windows.Forms.Padding(4);
@@ -359,9 +359,9 @@
             // dtpNgayTaoHoaDon
             // 
             this.dtpNgayTaoHoaDon.CalendarFont = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpNgayTaoHoaDon.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpNgayTaoHoaDon.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpNgayTaoHoaDon.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpNgayTaoHoaDon.Location = new System.Drawing.Point(3, 4);
+            this.dtpNgayTaoHoaDon.Location = new System.Drawing.Point(5, 7);
             this.dtpNgayTaoHoaDon.Margin = new System.Windows.Forms.Padding(4);
             this.dtpNgayTaoHoaDon.Name = "dtpNgayTaoHoaDon";
             this.dtpNgayTaoHoaDon.Size = new System.Drawing.Size(231, 30);
@@ -2283,9 +2283,9 @@
             // reportViewer1
             // 
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            reportDataSource1.Name = "DataSet1";
-            reportDataSource1.Value = this.DanhThu_ReportBindingSource;
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
+            reportDataSource2.Name = "DataSet1";
+            reportDataSource2.Value = this.DanhThu_ReportBindingSource;
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource2);
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "QuanLyCaPhe.Report1.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(4, 4);
             this.reportViewer1.Margin = new System.Windows.Forms.Padding(4);

@@ -34,6 +34,20 @@ create table NhanVien(
 	primary key(MaNV)
 )
 
+drop table if exists NhanVien_HoaDon_KhachHang
+create table NhanVien_HoaDon_KhachHang(
+	IDHoaDon int not null,
+	MaKH int not null,
+	TenNV nvarchar(20),
+	TenKH nvarChar(20),
+	NgayBan datetime,
+	ThanhTien money,
+
+	primary key (IDHoaDon ),
+
+)
+
+
 create table DangNhap(
 	TaiKhoan nvarchar(20),
 	MatKhau nvarchar(20),
@@ -124,7 +138,7 @@ create table TinhLuong(
 	primary key(MaNV),
 	foreign key (MaNV) references ChamCong(MaNV)
 )
-
+delete from NhanVien_HoaDon_KhachHang
 delete from KhachHang
 delete from  NhanVien
 delete from ThanhPho
