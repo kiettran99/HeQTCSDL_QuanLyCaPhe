@@ -75,6 +75,7 @@
     <Compile Include="BSLayer\LoaiThucAn.cs" />
     <Compile Include="BSLayer\NhanVien.cs" />
     <Compile Include="BSLayer\ThanhPho.cs" />
+    <Compile Include="BSLayer\ThongKeHoaDon.cs" />
     <Compile Include="BSLayer\ThucAn.cs" />
     <Compile Include="BSLayer\TinhLuong.cs" />
     <Compile Include="DSLayer\DBMain.cs" />

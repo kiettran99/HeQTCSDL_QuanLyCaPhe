@@ -19,6 +19,8 @@ namespace QuanLyCaPhe
         LoaiThucAn loaita = null;
         ThucAn thucan = null;
         HoaDon hoadon = null;
+        ThongKeHoaDon tkhoadon = null;
+        NhanVien nv = null;
         int idBan;
         float TongTienGoc = 0;
         //Biến Tĩnh Trạng Thái
@@ -33,6 +35,8 @@ namespace QuanLyCaPhe
             loaita = new LoaiThucAn();
             thucan = new ThucAn();
             hoadon = new HoaDon();
+            tkhoadon = new ThongKeHoaDon();
+            nv = new NhanVien();
         }
 
         #region Method
@@ -160,14 +164,14 @@ namespace QuanLyCaPhe
                 menuKhachHang.Visible = true;
 
                 menuNhanVien.Text = "Quản lý nhân viên";
-                QL.Visible = true;            
+                QL.Visible = true;
             }
             else
             {
                 if (quyentruycap == QuyenTruyCap.NhanVien)
                 {
-                    LoadTable();                   
-                    menuAdmin.Visible = false;                   
+                    LoadTable();
+                    menuAdmin.Visible = false;
                     panel1.Enabled = true;
                     menuThoat.Enabled = true;
                     menuDangNhap.Enabled = false;
@@ -180,9 +184,9 @@ namespace QuanLyCaPhe
 
                     menuNhanVien.Text = "Thông Tin Nhân Viên";
                 }
-               
+
             }
-           
+
         }
 
         private void menuThoat_Click(object sender, EventArgs e)
@@ -278,6 +282,12 @@ namespace QuanLyCaPhe
                     flpnlBanAn.Controls.Clear();
                     LoadTable();
                     HienThiHoaDon((dgvhoadon.Tag as Ban).Id);
+
+                    //In hóa đơn chứa thông tin nhân viên, khách hàng
+                    DataTable dtNhanVien = nv.LayNhanVienTheoID(FormManHinhChinh.IDNguoiDangNhap).Tables[0];
+                    string tenNhanVien = dtNhanVien.Rows[0]["TenNV"].ToString();
+                    tkhoadon.ThemThongKeHoaDon(IDBill, tenNhanVien, "Khách Mang Về", DateTime.Now, float.Parse(txtTongtien.Text));
+
                     FormThanhToan formThanhToan = new FormThanhToan(IDBill);
                     formThanhToan.Show();
                 }
@@ -315,7 +325,7 @@ namespace QuanLyCaPhe
                         LoadTable();
                         HienThiHoaDon((dgvhoadon.Tag as Ban).Id);
                     }
-                }                
+                }
             }
             catch { }
         }
