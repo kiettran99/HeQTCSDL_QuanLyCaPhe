@@ -85,7 +85,7 @@
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip.Size = new System.Drawing.Size(1193, 28);
+            this.menuStrip.Size = new System.Drawing.Size(1342, 33);
             this.menuStrip.TabIndex = 0;
             // 
             // toolStripMenuItem1
@@ -155,6 +155,7 @@
             this.menuKhachHang.Name = "menuKhachHang";
             this.menuKhachHang.Size = new System.Drawing.Size(224, 26);
             this.menuKhachHang.Text = "Quản lý khách hàng";
+            this.menuKhachHang.Click += new System.EventHandler(this.menuKhachHang_Click);
             // 
             // trợGiúpToolStripMenuItem
             // 

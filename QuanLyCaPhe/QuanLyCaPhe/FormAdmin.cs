@@ -542,7 +542,7 @@ namespace QuanLyCaPhe
 
         private void btnLuuTK_Click(object sender, EventArgs e)
         {
-            BLDN.ThemTK(txtTenTK.Text.Trim(), txtMaNVTK.Text.Trim(), txtMaNVTK.Text.Trim(), ref err);
+            BLDN.ThemTK(txtTenTK.Text.Trim(), txtMauKhauTK.Text.Trim(), txtMaNVTK.Text.Trim(), ref err);
             // Load lại DataGridView
             LoadTTTK();
             // THông Báo
@@ -717,8 +717,8 @@ namespace QuanLyCaPhe
             pictureBox1.Image.Save(pic, pictureBox1.Image.RawFormat);
             BLNV.ThemNhanVien(txtMaNV.Text, txtHoNV.Text.Trim(), txtTenNV.Text.Trim(), rdbNu.Checked, dtbNgayNV.Value,
            dtbNgaySinh.Value, txtDiaChi.Text.Trim(), txtDienThoai.Text.Trim(), tenanh, ref err);
-            BLCHC.ThemNhanVien(txtMaNV.Text.Trim(), txtTenNV.Text.Trim(), ref err);
-            BLTL.ThemNhanVien(txtMaNV.Text.Trim(), txtTenNV.Text.Trim(), ref err);
+            //BLCHC.ThemNhanVien(txtMaNV.Text.Trim(), txtTenNV.Text.Trim(), ref err);
+            //BLTL.ThemNhanVien(txtMaNV.Text.Trim(), txtTenNV.Text.Trim(), ref err);
 
             // Load lại DataGridView
             LoadDataNV();

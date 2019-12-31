@@ -329,5 +329,11 @@ namespace QuanLyCaPhe
             }
             catch { }
         }
+
+        private void menuKhachHang_Click(object sender, EventArgs e)
+        {
+            FormKhachHang kh = new FormKhachHang();
+            kh.ShowDialog();
+        }
     }
 }

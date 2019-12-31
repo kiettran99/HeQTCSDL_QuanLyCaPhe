@@ -13,6 +13,9 @@ begin
 	--Tìm ID Nhân viên chuẩn bị xóa
 	declare @MaNV int = (select deleted.MaNV from deleted)
 
+	--Xóa Tài Khoản nhân viên
+	delete from DangNhap where DangNhap.MaNV = @MaNV
+
 	--Xóa Tính Lương
 	delete from TinhLuong where TinhLuong.MaNV = @MaNV
 
