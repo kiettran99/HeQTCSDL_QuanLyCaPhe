@@ -12,4 +12,5 @@ AS
 
 	DELETE FROM ThucAn WHERE IDThucAn = @IDThucAn
 --Test
-EXEC uspDeleteThucAn 'Sinh Tố Bơ'
+select *from ThucAn;
+EXEC uspDeleteThucAn '4'
