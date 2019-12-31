@@ -24,6 +24,11 @@ namespace QuanLyCaPhe.BSLayer
             return dbMain.ExecuteQueryDataSet("uspGetNhanVien_ByTenNV", CommandType.StoredProcedure);
         }
 
+        public DataSet LayNhanVienTheoID(int MaNV)
+        {
+            return dbMain.ExecuteQueryDataSet($"select * from NhanVien where MaNV = {MaNV}", CommandType.Text);
+        } 
+
         public bool SuaNhanVien(string MaNV, string Ho, string TenNV, bool Nu, DateTime NgayNV, DateTime NgaySinh, string DiaChi, string SDT, ref string error)
         {
             string sqlString;

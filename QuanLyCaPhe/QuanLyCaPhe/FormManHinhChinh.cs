@@ -154,6 +154,12 @@ namespace QuanLyCaPhe
                 panel1.Enabled = true;
                 menuThoat.Enabled = true;
                 menuDangNhap.Enabled = false;
+
+                menuHoaDon.Visible = true;
+                menuThanhPho.Visible = true;
+                menuKhachHang.Visible = true;
+
+                menuNhanVien.Text = "Quản lý nhân viên";
                 QL.Visible = true;            
             }
             else
@@ -165,8 +171,16 @@ namespace QuanLyCaPhe
                     panel1.Enabled = true;
                     menuThoat.Enabled = true;
                     menuDangNhap.Enabled = false;
+
+                    QL.Visible = true;
+
+                    menuHoaDon.Visible = true;
+                    menuThanhPho.Visible = false;
+                    menuKhachHang.Visible = false;
+
+                    menuNhanVien.Text = "Thông Tin Nhân Viên";
                 }
-                QL.Visible = false;
+               
             }
            
         }
@@ -186,6 +200,9 @@ namespace QuanLyCaPhe
                 flpnlBanAn.Controls.Clear();
 
                 IDNguoiDangNhap = -1;
+
+                QL.Visible = false;
+                menuNhanVien.Text = "Quản lý nhân viên";
 
                 quyentruycap = QuyenTruyCap.Khong;
 

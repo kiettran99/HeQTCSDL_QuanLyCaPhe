@@ -25,10 +25,23 @@ namespace QuanLyCaPhe
         }
         void LoadData()
         {
-
-           
+            if (FormManHinhChinh.quyentruycap == QuyenTruyCap.Administrator)
+            {
                 try
                 {
+                    label1.Text = "Danh Mục Nhân Viên";
+
+                    //Chuyển về bình thường
+                    txtMaNV.ReadOnly = false;
+                    txtTenNV.ReadOnly = false;
+                    txtHoNV.ReadOnly = false;
+                    txtDiaChi.ReadOnly = false;
+                    txtDienThoai.ReadOnly = false;
+                    txtHoNV.ReadOnly = false;
+                    dtbNgayNV.Enabled = true;
+                    dtbNgaySinh.Enabled = true;
+                    rdbNu.Enabled = false;
+
                     dataTable = new DataTable();
                     dataTable.Clear();
                     DataSet ds = BLNV.LayNhanVien();
@@ -37,7 +50,7 @@ namespace QuanLyCaPhe
                     dgvNhanVien.DataSource = dataTable;
                     dgvNhanVien.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
                 }
-            catch (SqlException errr)
+                catch (SqlException errr)
                 {
                     MessageBox.Show(errr.Message);
                 }
@@ -51,14 +64,41 @@ namespace QuanLyCaPhe
                 dtbNgaySinh.ResetText();
                 // không cho thao tác trên các nút lưu/hủy
                 btnHuy.Enabled = false;
-                btnLuu.Enabled = false;              
+                btnLuu.Enabled = false;
                 // cho phép thao tác trên thêm/sửa/xóa/thoát               
                 btnSua.Enabled = true;
-            dgvNhanVien_CellClick(null, null);
-                                          
+                dgvNhanVien_CellClick(null, null);
+            }
+            else
+            {
+                //Chặn chỉ cho xem
+                label1.Text = "Thông tin nhân viên";
+                panel1.Visible = false;
+                gbTongQuat.Visible = false;
+
+                txtMaNV.ReadOnly = true;
+                txtTenNV.ReadOnly = true;
+                txtHoNV.ReadOnly = true;
+                txtDiaChi.ReadOnly = true;
+                txtDienThoai.ReadOnly = true;
+                txtHoNV.ReadOnly = true;
+                dtbNgayNV.Enabled = false;
+                dtbNgaySinh.Enabled = false;
+                rdbNu.Enabled = false;
+                
+                //Lấy nhân viên theo ID đăng nhập
+                DataTable dt = BLNV.LayNhanVienTheoID(FormManHinhChinh.IDNguoiDangNhap).Tables[0];
+                txtMaNV.Text = dt.Rows[0]["MaNV"].ToString();
+                rdbNu.Checked = (bool)dt.Rows[0]["Nu"];
+                dtbNgayNV.Text = dt.Rows[0]["NgayBD"].ToString();      
+                txtHoNV.Text = dt.Rows[0]["HoNV"].ToString();
+                txtTenNV.Text = dt.Rows[0]["TenNV"].ToString();
+                txtDienThoai.Text = dt.Rows[0]["SDT"].ToString();
+                txtDiaChi.Text = dt.Rows[0]["DiaChi"].ToString();
+            }
         }
-       
-       
+
+
 
         private void btnReLoad_Click(object sender, EventArgs e)
         {
@@ -111,9 +151,9 @@ namespace QuanLyCaPhe
             //thuc hiện lệnh
             NhanVien blnv = new NhanVien();
             if (FormDangNhap.MaNV.ToString() != txtMaNV.Text.Trim())
-                MessageBox.Show("Bạn không đủ quyền để thay đổi thông tin của người khác", "Thông báo",MessageBoxButtons.OKCancel ,MessageBoxIcon.Error);
-           else blnv.SuaNhanVien(FormDangNhap.MaNV.ToString(), txtHoNV.Text.Trim(), txtTenNV.Text.Trim(), rdbNu.Checked, dtbNgayNV.Value,
-                dtbNgaySinh.Value, txtDiaChi.Text.Trim(), txtDienThoai.Text.Trim(), ref err);
+                MessageBox.Show("Bạn không đủ quyền để thay đổi thông tin của người khác", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+            else blnv.SuaNhanVien(FormDangNhap.MaNV.ToString(), txtHoNV.Text.Trim(), txtTenNV.Text.Trim(), rdbNu.Checked, dtbNgayNV.Value,
+                 dtbNgaySinh.Value, txtDiaChi.Text.Trim(), txtDienThoai.Text.Trim(), ref err);
             // Load lại DataGridView
             LoadData();
             // THông Báo
@@ -123,7 +163,7 @@ namespace QuanLyCaPhe
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-           
+
             btnSua.Enabled = false;
 
             btnReLoad.Enabled = false;
@@ -143,14 +183,14 @@ namespace QuanLyCaPhe
             dtbNgaySinh.ResetText();
 
             dgvNhanVien_CellClick(null, null);
-        }       
+        }
 
         private void btnHuy_Click(object sender, EventArgs e)
         {
             dgvNhanVien_CellClick(null, null);
-            
+
             btnSua.Enabled = true;
-         
+
             btnThoat.Enabled = true;
             btnLuu.Enabled = false;
             btnHuy.Enabled = false;
@@ -163,7 +203,7 @@ namespace QuanLyCaPhe
 
         private void btnSuaPass_Click(object sender, EventArgs e)
         {
-            
+
             BLDN.SuaPass(txtMaNV.Text.Trim(), txtNewPass.Text.Trim(), ref err);
             MessageBox.Show(err);
         }
@@ -178,6 +218,6 @@ namespace QuanLyCaPhe
             }
         }
 
-       
+
     }
 }
