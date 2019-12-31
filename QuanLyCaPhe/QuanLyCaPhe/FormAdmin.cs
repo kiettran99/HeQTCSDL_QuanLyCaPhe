@@ -633,6 +633,8 @@ namespace QuanLyCaPhe
             txtDiaChi.ReadOnly = true;
             dtbNgayNV.Enabled = false;
             dtbNgaySinh.Enabled = false;
+
+            dgvNhanVien_CellClick(null, null);
         }
         private void LoadDataF()
         {
@@ -757,8 +759,8 @@ namespace QuanLyCaPhe
                 DialogResult dr = MessageBox.Show("Bạn có muốn xóa ?", "Thông báo", MessageBoxButtons.OKCancel);
                 if (dr == DialogResult.OK)
                 {
-                    BLTL.XoaNV(txtMaNV.Text.Trim(), ref err);
-                    BLCHC.XoaNhanVien(txtMaNV.Text.Trim(), ref err);
+                    //BLTL.XoaNV(txtMaNV.Text.Trim(), ref err);
+                    //BLCHC.XoaNhanVien(txtMaNV.Text.Trim(), ref err);
                     BLNV.XoaNhanVien(txtMaNV.Text, ref err);
                     LoadDataNV();
                 }
