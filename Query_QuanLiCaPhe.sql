@@ -56,11 +56,12 @@ create table NhanVien(
 drop table if exists NhanVien_HoaDon_KhachHang
 create table NhanVien_HoaDon_KhachHang(
 	IDHoaDon int not null,
+	MaNV int,
 	TenNV nvarchar(20),
 	TenKH nvarChar(20),
 	NgayBan datetime,
 	ThanhTien float,
-	primary key (IDHoaDon ),
+	primary key (IDHoaDon)
 )
 
 

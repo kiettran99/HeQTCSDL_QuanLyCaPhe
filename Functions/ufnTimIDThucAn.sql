@@ -28,6 +28,6 @@ CREATE FUNCTION ufnTimFThucAn( @TenThucAn nvarchar(100))
 AS
 RETURN (SELECT *
 		FROM dbo.ThucAn AS ThucAn
-		where TenThucAn like @TenThucAn)
+		where TenThucAn like '%' + @TenThucAn + '%')
 GO
 SELECT * FROM ufnTimFThucAn('7UP');

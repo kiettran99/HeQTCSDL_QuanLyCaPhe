@@ -42,6 +42,8 @@
             this.lbNS = new System.Windows.Forms.Label();
             this.lbMaKH = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cmbThanhPho = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cbGioiTinh = new System.Windows.Forms.ComboBox();
             this.btnThoat = new System.Windows.Forms.Button();
@@ -54,8 +56,6 @@
             this.tbMKH = new System.Windows.Forms.TextBox();
             this.lbKH = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cmbThanhPho = new System.Windows.Forms.ComboBox();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvKH)).BeginInit();
             this.panel1.SuspendLayout();
@@ -186,6 +186,28 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(930, 523);
             this.panel2.TabIndex = 4;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(373, 169);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(86, 20);
+            this.label2.TabIndex = 37;
+            this.label2.Text = "Thành Phố";
+            // 
+            // cmbThanhPho
+            // 
+            this.cmbThanhPho.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbThanhPho.FormattingEnabled = true;
+            this.cmbThanhPho.Items.AddRange(new object[] {
+            "Nam",
+            "Nữ",
+            "Không xác định"});
+            this.cmbThanhPho.Location = new System.Drawing.Point(493, 166);
+            this.cmbThanhPho.Name = "cmbThanhPho";
+            this.cmbThanhPho.Size = new System.Drawing.Size(180, 28);
+            this.cmbThanhPho.TabIndex = 36;
             // 
             // label1
             // 
@@ -323,28 +345,6 @@
             this.panel1.Size = new System.Drawing.Size(930, 65);
             this.panel1.TabIndex = 5;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(373, 169);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(86, 20);
-            this.label2.TabIndex = 37;
-            this.label2.Text = "Thành Phố";
-            // 
-            // cmbThanhPho
-            // 
-            this.cmbThanhPho.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbThanhPho.FormattingEnabled = true;
-            this.cmbThanhPho.Items.AddRange(new object[] {
-            "Nam",
-            "Nữ",
-            "Không xác định"});
-            this.cmbThanhPho.Location = new System.Drawing.Point(493, 166);
-            this.cmbThanhPho.Name = "cmbThanhPho";
-            this.cmbThanhPho.Size = new System.Drawing.Size(180, 28);
-            this.cmbThanhPho.TabIndex = 36;
-            // 
             // FormKhachHang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -398,7 +398,6 @@
         private System.Windows.Forms.Label lbKH;
         private System.Windows.Forms.TextBox tbMKH;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridView DgvKH;
         private System.Windows.Forms.Button btnThoat;
         private System.Windows.Forms.Button btnReload;
         private System.Windows.Forms.Button btnHuy;
@@ -406,5 +405,6 @@
         private System.Windows.Forms.ComboBox cbGioiTinh;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbThanhPho;
+        private System.Windows.Forms.DataGridView DgvKH;
     }
 }

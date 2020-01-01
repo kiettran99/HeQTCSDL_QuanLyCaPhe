@@ -15,12 +15,17 @@ namespace QuanLyCaPhe.BSLayer
 
         public DataSet LayThongKeHoaDon()
         {
-            return db.ExecuteQueryDataSet("select *from NhanVien_HoaDon_KhachHang", CommandType.Text);
+            return db.ExecuteQueryDataSet("select IDHoaDon, TenNV, TenKH, NgayBan, ThanhTien  from NhanVien_HoaDon_KhachHang", CommandType.Text);
         }
 
-        public void ThemThongKeHoaDon(int IDHoaDon, string TenNV, string TenKH, DateTime NgayBan, float ThanhTien)
+        public DataSet LayThongKeHoaDonTheoNhanVien(int MaNhanVien)
         {
-            db.MyExecuteNonQuery($"insert into NhanVien_HoaDon_KhachHang({IDHoaDon}, N'{TenNV}', N'{TenKH}', {NgayBan.ToString("YYYY-MM-DD")}, {ThanhTien})", CommandType.Text, ref err);
+            return db.ExecuteQueryDataSet($"select IDHoaDon, TenNV, TenKH, NgayBan, ThanhTien from NhanVien_HoaDon_KhachHang where MaNV = {MaNhanVien}", CommandType.Text);
+        }
+
+        public void ThemThongKeHoaDon(int IDHoaDon, int MaNV, string TenNV, string TenKH, DateTime NgayBan, float ThanhTien)
+        {
+            db.MyExecuteNonQuery($"insert into NhanVien_HoaDon_KhachHang values({IDHoaDon}, {MaNV}, N'{TenNV}', N'{TenKH}', N'{NgayBan.ToString("yyyy-MM-dd HH:mm:ss")}', {ThanhTien})", CommandType.Text, ref err);
         }
 
     }

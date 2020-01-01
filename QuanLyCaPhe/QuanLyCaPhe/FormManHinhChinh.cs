@@ -107,7 +107,6 @@ namespace QuanLyCaPhe
             idBan = (((sender as Button).Tag) as Ban).Id;
             dgvhoadon.Tag = (sender as Button).Tag;
             HienThiHoaDon(idBan);
-
         }
 
         /// <summary>
@@ -115,27 +114,34 @@ namespace QuanLyCaPhe
         /// </summary>
         private void btnThemMon_Click(object sender, EventArgs e)
         {
-            Ban ban = dgvhoadon.Tag as Ban;
-
-            //Lấy ID Hóa đơn của bàn
-            int idHoaDon = hoadon.LayIDHoaDonTheoBan(ban.Id);
-            int idFood = thucan.TimIDThucAn(cmbmonan.GetItemText(cmbmonan.SelectedItem));
-            int count = (int)nudThemmon.Value;
-
-            //Kiểm tra xem đã có sẵn hóa đơn chưa, nếu mới tạo thêm hóa đơn
-            if (idHoaDon == -1)
+            if (dgvhoadon.Tag != null)
             {
-                hoadon.ThemHoaDonTheoBan(ban.Id, ref error);
-                chitiethd.ThemChiTietHD(hoadon.MaxIDHoaDon(ref error), idFood, count, ref error);
-                banan.ThayDoiTinhTrang(ban.Id, true, ref error);
-                flpnlBanAn.Controls.Clear();
-                LoadTable();
-                HienThiHoaDon(ban.Id);
+                Ban ban = dgvhoadon.Tag as Ban;
+
+                //Lấy ID Hóa đơn của bàn
+                int idHoaDon = hoadon.LayIDHoaDonTheoBan(ban.Id);
+                int idFood = thucan.TimIDThucAn(cmbmonan.GetItemText(cmbmonan.SelectedItem));
+                int count = (int)nudThemmon.Value;
+
+                //Kiểm tra xem đã có sẵn hóa đơn chưa, nếu mới tạo thêm hóa đơn
+                if (idHoaDon == -1)
+                {
+                    hoadon.ThemHoaDonTheoBan(ban.Id, ref error);
+                    chitiethd.ThemChiTietHD(hoadon.MaxIDHoaDon(ref error), idFood, count, ref error);
+                    banan.ThayDoiTinhTrang(ban.Id, true, ref error);
+                    flpnlBanAn.Controls.Clear();
+                    LoadTable();
+                    HienThiHoaDon(ban.Id);
+                }
+                else
+                {
+                    chitiethd.ThemChiTietHD(hoadon.MaxIDHoaDon(ref error), idFood, count, ref error);
+                    HienThiHoaDon(ban.Id);
+                }
             }
             else
             {
-                chitiethd.ThemChiTietHD(hoadon.MaxIDHoaDon(ref error), idFood, count, ref error);
-                HienThiHoaDon(ban.Id);
+                MessageBox.Show("Chưa chọn số bàn để đặt món.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -277,16 +283,29 @@ namespace QuanLyCaPhe
                 if (MessageBox.Show("Bạn thật sự muốn thanh toán hóa đơn cho bàn " + idBan, "Thông báo",
                     MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.OK)
                 {
+                    float tongtien = float.Parse(txtTongtien.Text);
                     hoadon.CheckOut(IDBill, (int)nudgiamgia.Value, float.Parse(txtTongtien.Text));
                     banan.ThayDoiTinhTrang((dgvhoadon.Tag as Ban).Id, false, ref error);
                     flpnlBanAn.Controls.Clear();
                     LoadTable();
                     HienThiHoaDon((dgvhoadon.Tag as Ban).Id);
 
-                    //In hóa đơn chứa thông tin nhân viên, khách hàng
-                    DataTable dtNhanVien = nv.LayNhanVienTheoID(FormManHinhChinh.IDNguoiDangNhap).Tables[0];
-                    string tenNhanVien = dtNhanVien.Rows[0]["TenNV"].ToString();
-                    tkhoadon.ThemThongKeHoaDon(IDBill, tenNhanVien, "Khách Mang Về", DateTime.Now, float.Parse(txtTongtien.Text));
+                    //In hóa đơn chứa thông tin nhân viên, khách 
+                    string tenNhanVien = "";
+                    if (IDNguoiDangNhap == 0)
+                    {
+                        tenNhanVien = "Quản trị viên";
+                    }
+                    else
+                    {
+                        DataTable dtNhanVien = nv.LayNhanVienTheoID(IDNguoiDangNhap).Tables[0];
+                        if (dtNhanVien.Rows[0]["TenNV"] != null)
+                            tenNhanVien += dtNhanVien.Rows[0]["HoNV"].ToString();
+                        if (dtNhanVien.Rows[0]["TenNV"] != null)
+                            tenNhanVien += " " + dtNhanVien.Rows[0]["TenNV"].ToString();
+                    }
+
+                    tkhoadon.ThemThongKeHoaDon(IDBill, IDNguoiDangNhap, tenNhanVien, "Khách", DateTime.Now, tongtien);
 
                     FormThanhToan formThanhToan = new FormThanhToan(IDBill);
                     formThanhToan.Show();
