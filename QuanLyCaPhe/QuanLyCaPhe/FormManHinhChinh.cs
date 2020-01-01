@@ -299,7 +299,7 @@ namespace QuanLyCaPhe
                     else
                     {
                         DataTable dtNhanVien = nv.LayNhanVienTheoID(IDNguoiDangNhap).Tables[0];
-                        if (dtNhanVien.Rows[0]["TenNV"] != null)
+                        if (dtNhanVien.Rows[0]["HoNV"] != null)
                             tenNhanVien += dtNhanVien.Rows[0]["HoNV"].ToString();
                         if (dtNhanVien.Rows[0]["TenNV"] != null)
                             tenNhanVien += " " + dtNhanVien.Rows[0]["TenNV"].ToString();
