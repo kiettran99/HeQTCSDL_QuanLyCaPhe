@@ -16,6 +16,7 @@ namespace QuanLyCaPhe
     {
         #region Properties TabNhanVien
         DataTable dataTable = null;
+        BanLuongNhanVien BCLNV = new BanLuongNhanVien();
         NhanVien BLNV = new NhanVien();
         ThucAn BLTA = new ThucAn();
         ThucAn ta = null;
@@ -68,7 +69,10 @@ namespace QuanLyCaPhe
                 case 7:
                     LoadTL();
                     break;
-            }
+                case 9:
+                    LoadDataLuongNV();
+                    break;
+            }   
         }
 
         #region TabDanhThu
@@ -974,9 +978,37 @@ namespace QuanLyCaPhe
             dgvThucAn.DataSource = BLTA.TimKimF(txtSFname.Text).Tables[0];
         }
         #endregion
+        #region TabBaoCaoLuongNhanVien
+
+        private void LoadDataLuongNV()
+        {
+
+            try
+            {
+                dataTable = new DataTable();
+                dataTable.Clear();
+                DataSet ds = BCLNV.LayLuongNv();
+                dataTable = ds.Tables[0];
+                // đưa dữ liệu vào dataGridView
+                dgvBaoCaoLuong.DataSource = dataTable;
+
+            }
+            catch (Exception errr)
+            {
+                MessageBox.Show(errr.Message);
+            }
 
 
 
+            dgvChamCong_CellClick(null, null);
+        }
+
+
+
+
+
+
+        #endregion
         private void txtFName_TextChanged(object sender, EventArgs e)
         {
 
@@ -1005,6 +1037,46 @@ namespace QuanLyCaPhe
         }
 
         private void txtMaNVCC_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvTinhLuong_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void tabPage7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel31_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void reportViewer1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtTenL_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel33_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel12_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
         {
 
         }
