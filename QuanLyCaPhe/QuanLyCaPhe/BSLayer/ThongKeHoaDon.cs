@@ -15,7 +15,7 @@ namespace QuanLyCaPhe.BSLayer
 
         public DataSet LayThongKeHoaDon()
         {
-            return db.ExecuteQueryDataSet("select IDHoaDon, TenNV, TenKH, NgayBan, ThanhTien  from NhanVien_HoaDon_KhachHang", CommandType.Text);
+            return db.ExecuteQueryDataSet("select * from view_HoaDonBan", CommandType.Text);
         }
 
         public DataSet LayThongKeHoaDonTheoNhanVien(int MaNhanVien)
