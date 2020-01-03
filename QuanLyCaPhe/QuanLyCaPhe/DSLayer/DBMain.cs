@@ -14,6 +14,7 @@ namespace QuanLyCaPhe.DBLayer
         SqlCommand cmd = null;
         SqlDataAdapter dt = null;
 
+        //string strConnection = "Data Source=192.168.137.1;Initial Catalog=QuanLyCaPhe;User ID=sa;Password=123456;";
         string strConnection = "Data Source=./;" + "Initial Catalog=QuanLyCaPhe;" + "Integrated Security=True";
         public DBMain()
         {
